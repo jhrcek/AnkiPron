@@ -1,4 +1,4 @@
-package cz.janhrcek.ankipron;
+package cz.janhrcek.ankipron.dwds;
 
 import java.util.List;
 import java.util.Objects;

@@ -1,36 +1,38 @@
 package cz.janhrcek.ankipron;
 
+import cz.janhrcek.ankipron.anki.AnkiDatabaseUtil;
+import cz.janhrcek.ankipron.dwds.DWDS;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.io.FileUtils;
 
-import static cz.janhrcek.ankipron.DWDS.SearchResult.PRON_FOUND;
-import static cz.janhrcek.ankipron.DWDS.SearchResult.PRON_NOT_AVAILABLE;
-import static cz.janhrcek.ankipron.DWDS.SearchResult.WORD_NOT_FOUND;
+import static cz.janhrcek.ankipron.dwds.DWDS.SearchResult.PRON_FOUND;
+import static cz.janhrcek.ankipron.dwds.DWDS.SearchResult.PRON_NOT_AVAILABLE;
+import static cz.janhrcek.ankipron.dwds.DWDS.SearchResult.WORD_NOT_FOUND;
 
 /**
  *
  */
-public class Deutsch {
+public class PronDownloader {
 
-    private static final String PROJECT_DIR = "/home/jhrcek/Temp/AnkiDeutschPron/";
+    public static final String PROJECT_DIR = "/home/jhrcek/Temp/AnkiDeutschPron/";
     private static final String DOWNLOAD_DIR = PROJECT_DIR + "Downloaded";
     private static final String INPUT_FILE = PROJECT_DIR + "in.txt";
 
-    public static void main(String[] args) throws IOException {
+    public void performDownload(List<String> wordsToDownload) {
+        System.out.println(wordsToDownload.size() + " words to download");
         Map<String, String> word2pronURL = new HashMap<>();
         List<String> wordsNotFound = new ArrayList<>();
         List<String> pronNotAvailable = new ArrayList<>();
         List<String> unknownErrors = new ArrayList<>();
 
         DWDS dwds = new DWDS();
-        List<String> words = FileUtils.readLines(new File(INPUT_FILE));
 
-        for (String word : words) {
+        for (String word : wordsToDownload) {
             DWDS.SearchResult sr = dwds.search(word);
             switch (sr) {
                 case PRON_FOUND:
@@ -69,7 +71,7 @@ public class Deutsch {
         }
     }
 
-    private static void downloadAndRenamePronFile(String word, String pronUrl) {
+    private void downloadAndRenamePronFile(String word, String pronUrl) {
         ProcessBuilder pb = new ProcessBuilder("wget", pronUrl);
         pb.directory(new File(DOWNLOAD_DIR));
 
@@ -94,5 +96,22 @@ public class Deutsch {
 
     private static String getSimpleFilename(String url) {
         return url.substring(url.lastIndexOf("/"));
+    }
+
+    public List<String> getDownloadedProns() {
+        List<String> wordsAlreadyDownloaded = new ArrayList<>();
+        File[] mp3FilesInDownloadDir
+                = new File(DOWNLOAD_DIR).listFiles(new FilenameFilter() {
+
+                    @Override
+                    public boolean accept(File dir, String name) {
+                        return name.endsWith(".mp3");
+                    }
+                });
+        for (File mp3 : mp3FilesInDownloadDir) {
+            String filename = mp3.getName();
+            wordsAlreadyDownloaded.add(filename.substring(0, filename.indexOf(".")));
+        }
+        return wordsAlreadyDownloaded;
     }
 }
