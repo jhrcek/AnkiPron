@@ -19,58 +19,52 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class DWDS {
 
     private final WebDriver driver;
-    private static final By SEARCH_INPUT = By.cssSelector("#query");
-    private static final By FAST_SEARCH_INPUT = By.cssSelector("#query_fast_search");
-    private static final By SEARCH_SUBMIT = By.cssSelector("#search_submit");
-    private static final By SEARCHBAR_SUBMIT = By.cssSelector("#searchbar_submit");
+    private static final By SEARCH_INPUT = By.cssSelector("#query_fast_search");
+    private static final By SEARCH_SUBMIT = By.cssSelector("#searchbar_submit");
+    private static final By PANEL_LOADING = By.cssSelector(".panel_loading");
+    private static final By PRONOUNCIATION = By.cssSelector("#oneBitInsert_1");
+    private static final By WORD_FOUND = By.cssSelector(".wb_lzga");
+    private static final By PANEL_CLOSER = By.cssSelector(".panel_remove>img");
+
     private String pronUrl = null;
     private int counter = 0;
 
     public DWDS() {
         driver = new FirefoxDriver();
-        driver.get("http://www.dwds.de");
         performInitialSearch();
-        closeUnwantedPanelsOnQuicksearchPage();
+        closeUnwantedPanels();
     }
 
-    /**
-     * To get away from initial search page and onto the quick search page.
-     */
     private void performInitialSearch() {
-        driver.findElement(SEARCH_INPUT).sendKeys("Aberglaube");
-        driver.findElement(SEARCH_SUBMIT).click();
-        waitForElementVisible(By.cssSelector(".wb_lzga"));
+        driver.get("http://www.dwds.de/?qu=und");
+        waitForPageLoad();
     }
 
-    private void closeUnwantedPanelsOnQuicksearchPage() {
-        try { //Wait for all panels to load so we can close them
-            Thread.sleep(3000);
-        } catch (InterruptedException ex) {
-        }
-
+    private void closeUnwantedPanels() {
         List<WebElement> closeImages;
         do {
-            closeImages = driver.findElements(By.cssSelector(".panel_remove>img"));
+            closeImages = driver.findElements(PANEL_CLOSER);
             closeImages.get(1).click();
         } while (closeImages.size() > 2);
     }
 
-    public SearchResult search(String aWord) {
-        Objects.requireNonNull(aWord, "aWord must not be null!");
+    public SearchResult search(String word) {
+        Objects.requireNonNull(word, "aWord must not be null!");
         pronUrl = null;
-        System.out.print("Processing word " + ++counter + ": '" + aWord + "' - ");
-        driver.findElement(FAST_SEARCH_INPUT).clear();
-        driver.findElement(FAST_SEARCH_INPUT).sendKeys(aWord);
-        driver.findElement(SEARCHBAR_SUBMIT).click();
+        System.out.print("Processing word " + ++counter + ": '" + word + "' - ");
+        driver.findElement(SEARCH_INPUT).clear();
+        driver.findElement(SEARCH_INPUT).sendKeys(word);
+        driver.findElement(SEARCH_SUBMIT).click();
 
         try {
-            waitForElementVisible(By.cssSelector(".wb_lzga"));
+            waitForPageLoad();
+            driver.findElement(WORD_FOUND);
             try {
-                waitForElementVisible(By.cssSelector("#oneBitInsert_1"));
+                driver.findElement(PRONOUNCIATION);
                 pronUrl = getAudioURL();
                 System.out.println("Aussprache URL: " + pronUrl);
                 return SearchResult.PRON_FOUND;
-            } catch (TimeoutException ex) { //Word in dictionary, but no pronounciation available
+            } catch (NoSuchElementException ex) { //Word in dictionary, but no pronounciation available
                 System.out.println("Aussprache nicht vorhanden");
                 return SearchResult.PRON_NOT_AVAILABLE;
             }
@@ -85,8 +79,9 @@ public class DWDS {
         return SearchResult.UNKNOWN;
     }
 
-    private void waitForElementVisible(By by) {
-        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(by));
+    private void waitForPageLoad() {
+        new WebDriverWait(driver, 5, 100).until(
+                ExpectedConditions.not(ExpectedConditions.presenceOfAllElementsLocatedBy(PANEL_LOADING)));
     }
 
     public enum SearchResult {
@@ -98,7 +93,7 @@ public class DWDS {
     }
 
     private String getAudioURL() {
-        String flashvars = driver.findElement(By.cssSelector("#oneBitInsert_1")).getAttribute("flashvars");
+        String flashvars = driver.findElement(PRONOUNCIATION).getAttribute("flashvars");
         int mediaUrlBeginIndex = flashvars.indexOf("filename=") + "filename=".length();
         return flashvars.substring(mediaUrlBeginIndex);
     }

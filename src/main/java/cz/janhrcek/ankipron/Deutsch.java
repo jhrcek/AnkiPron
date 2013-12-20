@@ -56,20 +56,16 @@ public class Deutsch {
 
         System.out.println("----- REPORT -----");
         if (!word2pronURL.keySet().isEmpty()) {
-            System.out.println(" -- OK : " + word2pronURL.keySet().size());
-            System.out.println(word2pronURL.keySet());
+            System.out.printf("OK : %d %s%n", word2pronURL.keySet().size(), word2pronURL.keySet());
         }
         if (!wordsNotFound.isEmpty()) {
-            System.out.println(" -- not found: " + wordsNotFound.size());
-            System.out.println(wordsNotFound);
+            System.out.printf("NOT FOUND : %d %s%n", wordsNotFound.size(), wordsNotFound);
         }
         if (!pronNotAvailable.isEmpty()) {
-            System.out.println(" -- pron not available:: " + pronNotAvailable.size());
-            System.out.println(pronNotAvailable);
+            System.out.printf("PRON NOT AVAILABLE : %d %s%n", pronNotAvailable.size(), pronNotAvailable);
         }
         if (!unknownErrors.isEmpty()) {
-            System.out.println(" -- unknown errors: " + unknownErrors.size());
-            System.out.println(unknownErrors);
+            System.out.printf("UNKNOWN ERRORS : %d %s%n", unknownErrors.size(), unknownErrors);
         }
     }
 
