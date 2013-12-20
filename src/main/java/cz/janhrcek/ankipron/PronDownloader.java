@@ -1,6 +1,5 @@
 package cz.janhrcek.ankipron;
 
-import cz.janhrcek.ankipron.anki.AnkiDatabaseUtil;
 import cz.janhrcek.ankipron.dwds.DWDS;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -9,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.io.FileUtils;
 
 import static cz.janhrcek.ankipron.dwds.DWDS.SearchResult.PRON_FOUND;
 import static cz.janhrcek.ankipron.dwds.DWDS.SearchResult.PRON_NOT_AVAILABLE;
@@ -98,20 +98,29 @@ public class PronDownloader {
         return url.substring(url.lastIndexOf("/"));
     }
 
+    /**
+     * @return a list of words, for which downloaded .mp3 files exist in Donwload dir
+     */
     public List<String> getDownloadedProns() {
         List<String> wordsAlreadyDownloaded = new ArrayList<>();
-        File[] mp3FilesInDownloadDir
-                = new File(DOWNLOAD_DIR).listFiles(new FilenameFilter() {
+        File[] mp3FilesInDownloadDir = new File(DOWNLOAD_DIR).listFiles(new FilenameFilter() {
 
-                    @Override
-                    public boolean accept(File dir, String name) {
-                        return name.endsWith(".mp3");
-                    }
-                });
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.endsWith(".mp3");
+            }
+        });
         for (File mp3 : mp3FilesInDownloadDir) {
             String filename = mp3.getName();
             wordsAlreadyDownloaded.add(filename.substring(0, filename.indexOf(".")));
         }
         return wordsAlreadyDownloaded;
+    }
+
+    /**
+     * @return list of words, which were found on DWDS, but which don't have pronunciation available
+     */
+    public List<String> getWordsForWhichPronNotAvailable() throws IOException {
+        return FileUtils.readLines(new File(PROJECT_DIR, "pron_not_available.txt"));
     }
 }
