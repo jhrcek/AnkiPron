@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AnkiDatabaseUtil {
 
@@ -32,14 +34,19 @@ public class AnkiDatabaseUtil {
                 String flds = rs.getString("flds");
 
                 String deutsch = flds.split(FIELD_SEPARATOR)[1];
+                Matcher matcher = null;
+                // 1. Simplest case: only 1 word
+                if (deutsch.split(" ").length == 1) {
 
-                if (deutsch.split(" ").length == 1) { // 1. Simplest case: only 1 word
                     if (deutsch.contains("/") || deutsch.contains("(") || deutsch.contains(")")) {
                         deutsch = deutsch.replaceAll("/", "").replaceAll("\\(", "").replaceAll("\\)", "");
                     }
                     wordsWithoutPron.add(deutsch);
+                    //2. More complex cases, of the form <article> <wort> (-[e]s, -e)
+                } else if ((matcher = SUBSTANTIVE_WITH_ARTICLE.matcher(deutsch)).matches()) {
+                    wordsWithoutPron.add(matcher.group(1));
                 }
-                //TODO 2. solve more complex cases, of the form <article> <wort> (-[e]s, -e)
+
                 //TODO 3. solve most complex cases, irregular werbs etc.
             }
 
@@ -56,4 +63,7 @@ public class AnkiDatabaseUtil {
         }
         return wordsWithoutPron;
     }
+
+    //Word of the form "e Frau (-, -en)" -> only "Frau" will be sought for
+    private static final Pattern SUBSTANTIVE_WITH_ARTICLE = Pattern.compile("[res] ([^\\s]*) \\(.*\\)");
 }

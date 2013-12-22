@@ -123,4 +123,11 @@ public class PronDownloader {
     public List<String> getWordsForWhichPronNotAvailable() throws IOException {
         return FileUtils.readLines(new File(PROJECT_DIR, "pron_not_available.txt"));
     }
+
+    /**
+     * @return list of words, which cannot be found on DWDS
+     */
+    public List<String> getWordsNotFound() throws IOException {
+        return FileUtils.readLines(new File(PROJECT_DIR, "words_not_found.txt"));
+    }
 }
