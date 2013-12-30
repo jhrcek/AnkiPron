@@ -4,6 +4,7 @@ import cz.janhrcek.ankipron.PronDownloader;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,7 +18,7 @@ public class AnkiDatabaseUtil {
     //Select all visible fields of notes, that contain flag wort, but don't have mp3 file associated with them
     private static final String QUERY
             = "select id,tags,flds,sfld from notes where tags like '%wort%' and flds not like '%.mp3%';";
-    private static final String WORD_UPDATE = "update notes set flds='%s' where id=%d";
+    private static final String WORD_UPDATE = "update notes set flds=? where id=?";
 
     private static final String FIELD_SEPARATOR = ""; //Not a space!
 
@@ -43,10 +44,14 @@ public class AnkiDatabaseUtil {
                 if (word != null) {
                     System.out.printf("    - extracted word: '%s'\n", word);
                     wordsWithoutPron.add(word);
-                    if (isMp3Downloaded(word)) {
-                        String updateStatement = getUpdateStatement(wordId, flds);
-                        System.out.printf("    - mp3 present -> '%s'\n", updateStatement);
-                        //statement.executeUpdate(updateStatement);
+                    if (getMp3File(word).exists()) {
+                        try (PreparedStatement wordUpdate = connection.prepareStatement(WORD_UPDATE)) {
+                            wordUpdate.setString(1, addMp3Reference(flds));
+                            wordUpdate.setLong(2, wordId);
+                            wordUpdate.execute();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
                     }
                 }
             }
@@ -85,33 +90,39 @@ public class AnkiDatabaseUtil {
         }
     }
 
-    private boolean isMp3Downloaded(String word) {
-        String filename = word + ".mp3";
-        return new File(PronDownloader.DOWNLOAD_DIR, filename).exists();
+    private File getMp3File(String word) {
+        return new File(PronDownloader.DOWNLOAD_DIR, word + ".mp3");
     }
 
-    private String getUpdateStatement(long wordId, String flds) {
+    /**
+     * @param flds 'flds' attribute from Anki's 'notes' table
+     * @return flds field with reference to mp3 file corresponding to the german word added
+     */
+    private String addMp3Reference(String flds) {
         String[] fldsParts = flds.split(FIELD_SEPARATOR);
         if (!(fldsParts.length == 3 || fldsParts.length == 4)) {
             throw new IllegalStateException("Unexpected number of flds pars! " + fldsParts.length);
         }
 
+        String mp3FileName = getMp3File(extractWord(flds)).getName();
+
         StringBuilder newFlds = new StringBuilder()
                 .append(fldsParts[0])
                 .append(FIELD_SEPARATOR)
                 .append(fldsParts[1])
-                .append("[").append(extractWord(flds)).append(".mp3]")
+                .append("[").append(mp3FileName).append("]")
                 .append(FIELD_SEPARATOR)
                 .append(fldsParts[2]);
 
         if (fldsParts.length == 4) {
             newFlds.append(FIELD_SEPARATOR).append(fldsParts[3]);
         }
-
-        return String.format(WORD_UPDATE, newFlds, wordId);
+        System.out.printf("    - updated flds : '%s'\n", newFlds);
+        return newFlds.toString();
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
-        new AnkiDatabaseUtil().getWordsWithoutPron();
+        List<String> wordsWithoutPron = new AnkiDatabaseUtil().getWordsWithoutPron();
+        System.out.println(wordsWithoutPron + " " + wordsWithoutPron.size());
     }
 }
