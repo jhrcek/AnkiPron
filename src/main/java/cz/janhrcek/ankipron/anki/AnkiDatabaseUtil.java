@@ -110,7 +110,7 @@ public class AnkiDatabaseUtil {
                 .append(fldsParts[0])
                 .append(FIELD_SEPARATOR)
                 .append(fldsParts[1])
-                .append("[").append(mp3FileName).append("]")
+                .append("[sound:").append(mp3FileName).append("]")
                 .append(FIELD_SEPARATOR)
                 .append(fldsParts[2]);
 
