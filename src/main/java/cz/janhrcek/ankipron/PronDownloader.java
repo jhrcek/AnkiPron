@@ -20,7 +20,7 @@ import static cz.janhrcek.ankipron.dwds.DWDS.SearchResult.WORD_NOT_FOUND;
 public class PronDownloader {
 
     public static final String PROJECT_DIR = "/home/jhrcek/Temp/AnkiDeutschPron/";
-    private static final String DOWNLOAD_DIR = PROJECT_DIR + "Downloaded";
+    public static final String DOWNLOAD_DIR = PROJECT_DIR + "Downloaded";
     private static final String INPUT_FILE = PROJECT_DIR + "in.txt";
 
     public void performDownload(List<String> wordsToDownload) {
