@@ -21,7 +21,6 @@ public class PronDownloader {
 
     public static final String PROJECT_DIR = "/home/jhrcek/Temp/AnkiDeutschPron/";
     public static final String DOWNLOAD_DIR = PROJECT_DIR + "Downloaded";
-    private static final String INPUT_FILE = PROJECT_DIR + "in.txt";
 
     public void performDownload(List<String> wordsToDownload) {
         System.out.println(wordsToDownload.size() + " words to download");
@@ -114,6 +113,7 @@ public class PronDownloader {
             String filename = mp3.getName();
             wordsAlreadyDownloaded.add(filename.substring(0, filename.indexOf(".")));
         }
+        System.out.println("----- We have " + wordsAlreadyDownloaded.size() + " downloaded files");
         return wordsAlreadyDownloaded;
     }
 
@@ -121,13 +121,17 @@ public class PronDownloader {
      * @return list of words, which were found on DWDS, but which don't have pronunciation available
      */
     public List<String> getWordsForWhichPronNotAvailable() throws IOException {
-        return FileUtils.readLines(new File(PROJECT_DIR, "pron_not_available.txt"));
+        List<String> wordsWithoutPron = FileUtils.readLines(new File(PROJECT_DIR, "pron_not_available.txt"));
+        System.out.println("----- " + wordsWithoutPron.size() + " words don't have pron available");
+        return wordsWithoutPron;
     }
 
     /**
      * @return list of words, which cannot be found on DWDS
      */
     public List<String> getWordsNotFound() throws IOException {
-        return FileUtils.readLines(new File(PROJECT_DIR, "words_not_found.txt"));
+        List<String> wordsNotFound = FileUtils.readLines(new File(PROJECT_DIR, "words_not_found.txt"));
+        System.out.println("----- " + wordsNotFound.size() + " words cannot be found on DWDS");
+        return wordsNotFound;
     }
 }

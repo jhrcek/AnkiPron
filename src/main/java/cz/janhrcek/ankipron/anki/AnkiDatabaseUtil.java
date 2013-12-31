@@ -66,6 +66,7 @@ public class AnkiDatabaseUtil {
                 System.err.println(e);
             }
         }
+        System.out.println("----- " + wordsWithoutPron.size() + " words don't have pron associated in Anki DB");
         return wordsWithoutPron;
     }
 
@@ -86,6 +87,7 @@ public class AnkiDatabaseUtil {
             return matcher.group(1);
         } else {
             //TODO 3. solve most complex cases, irregular werbs etc.
+            System.out.println(deutsch);
             return null;
         }
     }
