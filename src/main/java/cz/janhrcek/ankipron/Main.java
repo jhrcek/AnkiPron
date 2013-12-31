@@ -32,6 +32,6 @@ public class Main {
         wordsWithoutPron.removeAll(downloader.getWordsNotFound());
 
         System.out.println("----- " + wordsWithoutPron.size() + " words remaining to download");
-        new PronDownloader().performDownload(wordsWithoutPron);
+        downloader.performDownload(wordsWithoutPron);
     }
 }
