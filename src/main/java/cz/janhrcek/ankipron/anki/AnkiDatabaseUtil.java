@@ -103,7 +103,12 @@ public class AnkiDatabaseUtil {
             }
             wort = wort.replaceAll("/", "");
 
-            return wort;
+            if (wort.split(" ").length == 1) {
+                return wort;
+            } else {
+                //TODO - edge cases probably not worth processing
+                return null;
+            }
         }
     }
 
