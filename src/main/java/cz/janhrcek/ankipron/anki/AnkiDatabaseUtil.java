@@ -24,7 +24,10 @@ public class AnkiDatabaseUtil {
 
     //Word of the form "e Frau (-, -en)" -> only "Frau" will be sought for
     private static final Pattern SUBSTANTIVE_WITH_ARTICLE = Pattern.compile("[res] ([^\\s]*) \\(.*\\)");
+    private static final Pattern SUBST_WITH_ARTICLE = Pattern.compile("^\\(?[res]\\)?(/e)? ([^\\s]*)");
     private static final Pattern SUBSTANTIVE_WITHOUT_DECLINATION = Pattern.compile("\\(*[res]\\)* ([^\\s]*)");
+
+    private static final String THING_IN_PARENS = "\\([^\\)]*\\)"; //Aything surrounded by ()
 
     public List<String> getWordsWithoutPron() throws ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
@@ -89,8 +92,18 @@ public class AnkiDatabaseUtil {
             //3. More complex cases of the form <article> <wort>
             return matcher.group(1);
         } else {
-            //TODO 3. solve most complex cases, irregular werbs etc.
-            return null;
+            //TODO 3. solve most complex cases, irregular cerbs etc.
+            String wort = deutsch.replaceAll(THING_IN_PARENS, "").trim();
+            if (wort.contains(" - ")) {
+                //Take only the part before '-'
+                wort = wort.substring(0, wort.indexOf(" - "));
+            }
+            if ((matcher = SUBST_WITH_ARTICLE.matcher(wort)).matches()) {
+                wort = matcher.group(2);
+            }
+            wort = wort.replaceAll("/", "");
+
+            return wort;
         }
     }
 
