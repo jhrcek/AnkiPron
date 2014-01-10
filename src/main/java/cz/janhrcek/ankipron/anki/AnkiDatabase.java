@@ -1,6 +1,6 @@
 package cz.janhrcek.ankipron.anki;
 
-import cz.janhrcek.ankipron.PronDownloader;
+import cz.janhrcek.ankipron.Project;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AnkiDatabaseUtil {
+public class AnkiDatabase {
 
     //Select all visible fields of notes, that contain flag wort, but don't have mp3 file associated with them
     private static final String WORDS_WITHOUT_PRON_QUERY
@@ -32,8 +32,8 @@ public class AnkiDatabaseUtil {
     public List<String> getWordsWithoutPron() throws ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
         List<String> wordsWithoutPron = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + PronDownloader.PROJECT_DIR
-                + "collection.anki2")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + Project.getRootDir().getAbsolutePath()
+                + "/collection.anki2")) {
 
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(WORDS_WITHOUT_PRON_QUERY);
@@ -60,7 +60,6 @@ public class AnkiDatabaseUtil {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
-        System.out.println("----- " + wordsWithoutPron.size() + " words don't have pron associated in Anki DB");
         return wordsWithoutPron;
     }
 
@@ -103,7 +102,7 @@ public class AnkiDatabaseUtil {
     }
 
     private File getMp3File(String word) {
-        return new File(PronDownloader.DOWNLOAD_DIR, word + ".mp3");
+        return new File(Project.getDownloadDir(), word + ".mp3");
     }
 
     /**
@@ -134,7 +133,7 @@ public class AnkiDatabaseUtil {
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
-        List<String> wordsWithoutPron = new AnkiDatabaseUtil().getWordsWithoutPron();
+        List<String> wordsWithoutPron = new AnkiDatabase().getWordsWithoutPron();
         System.out.println(wordsWithoutPron + " " + wordsWithoutPron.size());
     }
 }

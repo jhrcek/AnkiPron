@@ -2,25 +2,17 @@ package cz.janhrcek.ankipron;
 
 import cz.janhrcek.ankipron.dwds.DWDS;
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.io.FileUtils;
 
 import static cz.janhrcek.ankipron.dwds.DWDS.SearchResult.PRON_FOUND;
 import static cz.janhrcek.ankipron.dwds.DWDS.SearchResult.PRON_NOT_AVAILABLE;
 import static cz.janhrcek.ankipron.dwds.DWDS.SearchResult.WORD_NOT_FOUND;
 
-/**
- *
- */
 public class PronDownloader {
-
-    public static final String PROJECT_DIR = "/home/jhrcek/Temp/AnkiDeutschPron/";
-    public static final String DOWNLOAD_DIR = PROJECT_DIR + "Downloaded";
 
     public void performDownload(List<String> wordsToDownload) {
         System.out.println(wordsToDownload.size() + " words to download");
@@ -72,7 +64,7 @@ public class PronDownloader {
 
     private void downloadAndRenamePronFile(String word, String pronUrl) {
         ProcessBuilder pb = new ProcessBuilder("wget", pronUrl);
-        pb.directory(new File(DOWNLOAD_DIR));
+        pb.directory(Project.getDownloadDir());
 
         Process p;
         try {
@@ -81,11 +73,11 @@ public class PronDownloader {
             p.waitFor();
 
             String expectedFilename = getSimpleFilename(pronUrl);
-            File downloadedPronFile = new File(DOWNLOAD_DIR, expectedFilename);
+            File downloadedPronFile = new File(Project.getDownloadDir(), expectedFilename);
             System.out.println("Checking for presence of '" + expectedFilename + (downloadedPronFile.exists()
                     ? "' - OK, present" : "' - NOT PRESENT!"));
 
-            downloadedPronFile.renameTo(new File(DOWNLOAD_DIR, word + ".mp3"));
+            downloadedPronFile.renameTo(new File(Project.getDownloadDir(), word + ".mp3"));
 
         } catch (IOException | InterruptedException ex) {
             System.err.
@@ -95,43 +87,5 @@ public class PronDownloader {
 
     private static String getSimpleFilename(String url) {
         return url.substring(url.lastIndexOf("/"));
-    }
-
-    /**
-     * @return a list of words, for which downloaded .mp3 files exist in Donwload dir
-     */
-    public List<String> getDownloadedProns() {
-        List<String> wordsAlreadyDownloaded = new ArrayList<>();
-        File[] mp3FilesInDownloadDir = new File(DOWNLOAD_DIR).listFiles(new FilenameFilter() {
-
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.endsWith(".mp3");
-            }
-        });
-        for (File mp3 : mp3FilesInDownloadDir) {
-            String filename = mp3.getName();
-            wordsAlreadyDownloaded.add(filename.substring(0, filename.indexOf(".")));
-        }
-        System.out.println("----- We have " + wordsAlreadyDownloaded.size() + " downloaded files");
-        return wordsAlreadyDownloaded;
-    }
-
-    /**
-     * @return list of words, which were found on DWDS, but which don't have pronunciation available
-     */
-    public List<String> getWordsForWhichPronNotAvailable() throws IOException {
-        List<String> wordsWithoutPron = FileUtils.readLines(new File(PROJECT_DIR, "pron_not_available.txt"));
-        System.out.println("----- " + wordsWithoutPron.size() + " words don't have pron available");
-        return wordsWithoutPron;
-    }
-
-    /**
-     * @return list of words, which cannot be found on DWDS
-     */
-    public List<String> getWordsNotFound() throws IOException {
-        List<String> wordsNotFound = FileUtils.readLines(new File(PROJECT_DIR, "words_not_found.txt"));
-        System.out.println("----- " + wordsNotFound.size() + " words cannot be found on DWDS");
-        return wordsNotFound;
     }
 }

@@ -1,37 +1,40 @@
 package cz.janhrcek.ankipron;
 
-import cz.janhrcek.ankipron.anki.AnkiDatabaseUtil;
+import cz.janhrcek.ankipron.anki.AnkiDatabase;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
-import static cz.janhrcek.ankipron.PronDownloader.PROJECT_DIR;
-
 /**
- *
  * @author jhrcek
  */
 public class Main {
 
-    private static final String INPUT_FILE = PROJECT_DIR + "in.txt";
-
     public static void main(String[] args) throws IOException, ClassNotFoundException {
+        List<String> alreadyDownloaded = Project.getWordsDownloaded();
+        List<String> notInDictionary = Project.getWordsNotFound();
+        List<String> withoutDownloadablePron = Project.getWordsForWhichPronNotAvailable();
+
         //Check which words don't have pronounciation associated with them in anki db
-        List<String> wordsWithoutPron = new AnkiDatabaseUtil().getWordsWithoutPron();
-        //Alternatively, we can just read them from input file
-        //wordsWithoutPron = FileUtils.readLines(new File(INPUT_FILE));
+        List<String> wordsWithoutPron = new AnkiDatabase().getWordsWithoutPron();
+        logCollectionInfo(wordsWithoutPron, "Words in Anki, that don't have associated pron", false);
+        wordsWithoutPron.removeAll(alreadyDownloaded);
+        wordsWithoutPron.removeAll(withoutDownloadablePron);
+        wordsWithoutPron.removeAll(notInDictionary);
+
+        logCollectionInfo(alreadyDownloaded, "Words already downloaded", false);
+        logCollectionInfo(notInDictionary, "Words, that can't be found in DWDS", false);
+        logCollectionInfo(withoutDownloadablePron, "Words that don't have downloadable pron", false);
+        logCollectionInfo(wordsWithoutPron, "Words remaining to be downloaded", true);
 
         PronDownloader downloader = new PronDownloader();
-
-        //Don't download words we already have downloaded
-        wordsWithoutPron.removeAll(downloader.getDownloadedProns());
-
-        //Don't download words that don't have downloadable pron on DWDS
-        wordsWithoutPron.removeAll(downloader.getWordsForWhichPronNotAvailable());
-
-        //Don't try to download words that cannot be found on DWDS
-        wordsWithoutPron.removeAll(downloader.getWordsNotFound());
-
-        System.out.println("----- " + wordsWithoutPron.size() + " words remaining to download");
         downloader.performDownload(wordsWithoutPron);
+    }
+
+    private static void logCollectionInfo(Collection<?> c, String description, boolean alsoLogContents) {
+        System.out.println("----- " + description + " :" + c.size());
+        if (alsoLogContents) {
+            System.out.println(c);
+        }
     }
 }
