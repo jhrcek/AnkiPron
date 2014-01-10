@@ -16,9 +16,9 @@ import java.util.regex.Pattern;
 public class AnkiDatabaseUtil {
 
     //Select all visible fields of notes, that contain flag wort, but don't have mp3 file associated with them
-    private static final String QUERY
+    private static final String WORDS_WITHOUT_PRON_QUERY
             = "select id,tags,flds,sfld from notes where tags like '%wort%' and flds not like '%.mp3%';";
-    private static final String WORD_UPDATE = "update notes set flds=? where id=?";
+    private static final String WORD_UPDATE_QUERY = "update notes set flds=? where id=?";
 
     private static final String FIELD_SEPARATOR = ""; //Not a space!
 
@@ -32,13 +32,11 @@ public class AnkiDatabaseUtil {
     public List<String> getWordsWithoutPron() throws ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
         List<String> wordsWithoutPron = new ArrayList<>();
-        Connection connection = null;
-        try {
-            // create a database connection
-            connection = DriverManager.getConnection("jdbc:sqlite:" + PronDownloader.PROJECT_DIR + "collection.anki2");
-            Statement statement = connection.createStatement();
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + PronDownloader.PROJECT_DIR
+                + "collection.anki2")) {
 
-            ResultSet rs = statement.executeQuery(QUERY);
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(WORDS_WITHOUT_PRON_QUERY);
             while (rs.next()) {
                 String flds = rs.getString("flds");
                 long wordId = rs.getLong("id");
@@ -49,7 +47,7 @@ public class AnkiDatabaseUtil {
                     System.out.printf("    - extracted word: '%s'\n", word);
                     wordsWithoutPron.add(word);
                     if (getMp3File(word).exists()) {
-                        try (PreparedStatement wordUpdate = connection.prepareStatement(WORD_UPDATE)) {
+                        try (PreparedStatement wordUpdate = conn.prepareStatement(WORD_UPDATE_QUERY)) {
                             wordUpdate.setString(1, addMp3Reference(flds));
                             wordUpdate.setLong(2, wordId);
                             wordUpdate.execute();
@@ -61,14 +59,6 @@ public class AnkiDatabaseUtil {
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
         }
         System.out.println("----- " + wordsWithoutPron.size() + " words don't have pron associated in Anki DB");
         return wordsWithoutPron;
