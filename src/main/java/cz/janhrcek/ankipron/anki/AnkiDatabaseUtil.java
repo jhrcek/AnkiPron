@@ -86,7 +86,7 @@ public class AnkiDatabaseUtil {
             String wort = deutsch.replaceAll(THING_IN_PARENS, "").trim();
             if (wort.contains(" - ")) {
                 //Take only the part before '-'
-                wort = wort.substring(0, wort.indexOf(" - "));
+                wort = wort.substring(0, wort.indexOf(" - ")).trim();
             }
             if ((matcher = SUBST_WITH_ARTICLE.matcher(wort)).matches()) {
                 wort = matcher.group(2);
