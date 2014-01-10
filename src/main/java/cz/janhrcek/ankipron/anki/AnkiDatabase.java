@@ -32,8 +32,7 @@ public class AnkiDatabase {
     public List<String> getWordsWithoutPron() throws ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
         List<String> wordsWithoutPron = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + Project.getRootDir().getAbsolutePath()
-                + "/collection.anki2")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + Project.getAnkiDb())) {
 
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(WORDS_WITHOUT_PRON_QUERY);

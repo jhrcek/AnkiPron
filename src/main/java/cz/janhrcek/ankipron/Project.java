@@ -13,10 +13,14 @@ import org.apache.commons.io.FileUtils;
  */
 public class Project {
 
+    public static void main(String[] args) {
+        System.out.println(getRootDir());
+    }
     private static final File ROOT_DIR = new File("/home/jhrcek/Temp/AnkiDeutschPron/");
     private static final File DOWNLOAD_DIR = new File(ROOT_DIR, "Downloaded");
     private static final File WORDS_FOR_WHICH_PRON_NOT_AVAILABLE = new File(ROOT_DIR, "pron_not_available.txt");
     private static final File WORDS_NOT_FOUND = new File(ROOT_DIR, "words_not_found.txt");
+    private static final File ANKI_DB = new File(ROOT_DIR, "collection.anki2");
 
     public static File getRootDir() {
         return ROOT_DIR;
@@ -24,6 +28,10 @@ public class Project {
 
     public static File getDownloadDir() {
         return DOWNLOAD_DIR;
+    }
+
+    public static File getAnkiDb() {
+        return ANKI_DB;
     }
 
     /**
