@@ -10,8 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import static cz.janhrcek.ankipron.anki.WordExtractor.FIELD_SEPARATOR;
 
 public class AnkiDatabase {
 
@@ -19,15 +19,7 @@ public class AnkiDatabase {
     private static final String WORDS_WITHOUT_PRON_QUERY
             = "select id,tags,flds,sfld from notes where tags like '%wort%' and flds not like '%.mp3%';";
     private static final String WORD_UPDATE_QUERY = "update notes set flds=? where id=?";
-
-    private static final String FIELD_SEPARATOR = ""; //Not a space!
-
-    //Word of the form "e Frau (-, -en)" -> only "Frau" will be sought for
-    private static final Pattern SUBSTANTIVE_WITH_ARTICLE = Pattern.compile("[res] ([^\\s]*) \\(.*\\)");
-    private static final Pattern SUBST_WITH_ARTICLE = Pattern.compile("^\\(?[res]\\)?(/e)? ([^\\s]*)");
-    private static final Pattern SUBSTANTIVE_WITHOUT_DECLINATION = Pattern.compile("\\(*[res]\\)* ([^\\s]*)");
-
-    private static final String THING_IN_PARENS = "\\([^\\)]*\\)"; //Aything surrounded by ()
+    private final WordExtractor extractor = new WordExtractor();
 
     public List<String> getWordsWithoutPron() throws ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
@@ -39,11 +31,10 @@ public class AnkiDatabase {
             while (rs.next()) {
                 String flds = rs.getString("flds");
                 long wordId = rs.getLong("id");
-                String word = extractWord(flds);
+                String word = extractor.extractWord(flds);
 
-                System.out.printf("Processing note '%s'\n", flds);
                 if (word != null) {
-                    System.out.printf("    - extracted word: '%s'\n", word);
+                    System.out.printf("%-25s <- '%s'\n", word, flds);
                     wordsWithoutPron.add(word);
                     if (getMp3File(word).exists()) {
                         try (PreparedStatement wordUpdate = conn.prepareStatement(WORD_UPDATE_QUERY)) {
@@ -62,44 +53,6 @@ public class AnkiDatabase {
         return wordsWithoutPron;
     }
 
-    /**
-     * @param databaseField 'flds' attribute from Anki's 'notes' table
-     * @return german word that can be searched in the dictionary and whose pron we want to search
-     */
-    private String extractWord(String databaseField) {
-        String deutsch = databaseField.split(FIELD_SEPARATOR)[1];
-        Matcher matcher = null;
-
-        if (deutsch.split(" ").length == 1) {
-            // 1. Simplest case: only 1 word
-            return deutsch.replaceAll("[/\\(\\)]", ""); // Remove all occurences of '/', '(' and ')'
-        } else if ((matcher = SUBSTANTIVE_WITH_ARTICLE.matcher(deutsch)).matches()) {
-            //2. More complex cases of the form <article> <wort> (-[e]s, -e)
-            return matcher.group(1);
-        } else if ((matcher = SUBSTANTIVE_WITHOUT_DECLINATION.matcher(deutsch)).matches()) {
-            //3. More complex cases of the form <article> <wort>
-            return matcher.group(1);
-        } else {
-            //TODO 3. solve most complex cases, irregular cerbs etc.
-            String wort = deutsch.replaceAll(THING_IN_PARENS, "").trim();
-            if (wort.contains(" - ")) {
-                //Take only the part before '-'
-                wort = wort.substring(0, wort.indexOf(" - ")).trim();
-            }
-            if ((matcher = SUBST_WITH_ARTICLE.matcher(wort)).matches()) {
-                wort = matcher.group(2);
-            }
-            wort = wort.replaceAll("/", "");
-
-            if (wort.split(" ").length == 1) {
-                return wort;
-            } else {
-                //TODO - edge cases probably not worth processing
-                return null;
-            }
-        }
-    }
-
     private File getMp3File(String word) {
         return new File(Project.getDownloadDir(), word + ".mp3");
     }
@@ -114,7 +67,7 @@ public class AnkiDatabase {
             throw new IllegalStateException("Unexpected number of flds pars! " + fldsParts.length);
         }
 
-        String mp3FileName = getMp3File(extractWord(flds)).getName();
+        String mp3FileName = getMp3File(extractor.extractWord(flds)).getName();
 
         StringBuilder newFlds = new StringBuilder()
                 .append(fldsParts[0])
@@ -129,10 +82,5 @@ public class AnkiDatabase {
         }
         System.out.printf("    - updated flds : '%s'\n", newFlds);
         return newFlds.toString();
-    }
-
-    public static void main(String[] args) throws ClassNotFoundException {
-        List<String> wordsWithoutPron = new AnkiDatabase().getWordsWithoutPron();
-        System.out.println(wordsWithoutPron + " " + wordsWithoutPron.size());
     }
 }
