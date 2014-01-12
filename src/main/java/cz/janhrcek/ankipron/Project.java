@@ -13,9 +13,6 @@ import org.apache.commons.io.FileUtils;
  */
 public class Project {
 
-    public static void main(String[] args) {
-        System.out.println(getRootDir());
-    }
     private static final File ROOT_DIR = new File("/home/jhrcek/Temp/AnkiDeutschPron/");
     private static final File DOWNLOAD_DIR = new File(ROOT_DIR, "Downloaded");
     private static final File WORDS_FOR_WHICH_PRON_NOT_AVAILABLE = new File(ROOT_DIR, "pron_not_available.txt");

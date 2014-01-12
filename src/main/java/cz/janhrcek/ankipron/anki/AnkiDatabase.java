@@ -62,24 +62,16 @@ public class AnkiDatabase {
      * @return flds field with reference to mp3 file corresponding to the german word added
      */
     private String addMp3Reference(String flds) {
-        String[] fldsParts = flds.split(FIELD_SEPARATOR);
-        if (!(fldsParts.length == 3 || fldsParts.length == 4)) {
-            throw new IllegalStateException("Unexpected number of flds pars! " + fldsParts.length);
-        }
-
+        String[] fields = extractor.getFields(flds);
         String mp3FileName = getMp3File(extractor.extractWord(flds)).getName();
 
         StringBuilder newFlds = new StringBuilder()
-                .append(fldsParts[0])
-                .append(FIELD_SEPARATOR)
-                .append(fldsParts[1])
+                .append(fields[0])
+                .append(FIELD_SEPARATOR).append(fields[1])
                 .append("[sound:").append(mp3FileName).append("]")
-                .append(FIELD_SEPARATOR)
-                .append(fldsParts[2]);
+                .append(FIELD_SEPARATOR).append(fields[2])
+                .append(FIELD_SEPARATOR).append(fields[3]);
 
-        if (fldsParts.length == 4) {
-            newFlds.append(FIELD_SEPARATOR).append(fldsParts[3]);
-        }
         System.out.printf("    - updated flds : '%s'\n", newFlds);
         return newFlds.toString();
     }

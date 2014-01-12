@@ -18,11 +18,36 @@ public class WordExtractor {
     private static final String THING_IN_PARENS = "\\([^\\)]*\\)"; //Aything surrounded by ()
 
     /**
-     * @param databaseField 'flds' attribute from Anki's 'notes' table
-     * @return german word that can be searched in the dictionary and whose pron we want to search
+     * @param fldsAttribute 'flds' attribute from Anki's 'notes' table, representing 4-tuple: "Czech deutsch note
+     * reverse", where each of the 4 fields is separated by FIELD_SEPARATOR
+     *
+     * @return German word extracted from the deutsch part, that can be searched in the dictionary and whose
+     * pronunciation we want to search
      */
-    public String extractWord(String databaseField) {
-        String deutsch = databaseField.split(FIELD_SEPARATOR)[1];
+    public String extractWord(String fldsAttribute) {
+        String deutsch = getFields(fldsAttribute)[1];
+        return extractFromDeutschField(deutsch);
+    }
+
+    /**
+     * @param fldsAttribute
+     * @return the 4 fields of the fldsAttribute
+     * @throws IllegalArgumentException when fldsAttribute does not have 4 fields separated by FIELD_SEPARATOR
+     */
+    public String[] getFields(String fldsAttribute) {
+        String[] fields = fldsAttribute.split(FIELD_SEPARATOR);
+        if (fields.length != 4) {
+            throw new IllegalArgumentException("flds had " + fields.length + " instead of the expected 4: "
+                    + fldsAttribute);
+        }
+        return fields;
+    }
+
+    /**
+     * @param deutsch field extracted from flds attribute, which represents German word with some associated info
+     * @return the word we can search in the dictionary
+     */
+    private String extractFromDeutschField(String deutsch) {
         Matcher matcher = null;
 
         if (deutsch.split(" ").length == 1) {
