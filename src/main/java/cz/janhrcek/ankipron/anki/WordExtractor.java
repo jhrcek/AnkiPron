@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  */
 public class WordExtractor {
 
-    public static final String FIELD_SEPARATOR = "\u001F"; //Not a space!
+    public static final String FIELD_SEPARATOR = "\u001F"; //Unicode Character 'INFORMATION SEPARATOR ONE'
 
     //Word of the form "e Frau (-, -en)" -> only "Frau" will be sought for
     private static final Pattern SUBSTANTIVE_WITH_ARTICLE = Pattern.compile("[res] ([^\\s]*) \\(.*\\)");
