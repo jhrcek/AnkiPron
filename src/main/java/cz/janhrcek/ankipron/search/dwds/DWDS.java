@@ -20,10 +20,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class DWDS implements Searcher {
 
     private final WebDriver driver;
-    private static final By SEARCH_INPUT = By.cssSelector("#query_fast_search");
-    private static final By SEARCH_SUBMIT = By.cssSelector("#searchbar_submit");
+    private static final By SEARCH_INPUT = By.id("query_fast_search");
+    private static final By SEARCH_SUBMIT = By.id("searchbar_submit");
     private static final By PANEL_LOADING = By.cssSelector(".panel_loading");
-    private static final By PRONOUNCIATION = By.cssSelector("#oneBitInsert_1");
+    private static final By PRONOUNCIATION = By.id("oneBitInsert_1");
     private static final By WORD_FOUND = By.cssSelector(".wb_lzga");
     private static final By PANEL_CLOSER = By.cssSelector(".panel_remove>img");
 

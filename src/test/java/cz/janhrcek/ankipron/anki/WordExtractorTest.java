@@ -18,7 +18,7 @@ public class WordExtractorTest {
     }
 
     @DataProvider
-    private Object[][] words() {
+    Object[][] words() {
         return new Object[][]{
             {"pralinkae Praline (-, -n)y", "Praline"},
             {"vydání (knihy ap.)e Auflage (-, -n)y", "Auflage"},
