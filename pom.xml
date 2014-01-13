@@ -24,7 +24,7 @@
   </build>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <selenium.version>2.38.0</selenium.version>
+    <selenium.version>2.39.0</selenium.version>
   </properties>
 
   <dependencies>
