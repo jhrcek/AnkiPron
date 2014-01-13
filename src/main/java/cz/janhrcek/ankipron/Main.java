@@ -12,8 +12,8 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        //downloadMp3sForWords();
         verifyAnkiNotesIntegrity();
+        downloadMp3sForWords();
     }
 
     public static void downloadMp3sForWords() throws IOException, ClassNotFoundException {

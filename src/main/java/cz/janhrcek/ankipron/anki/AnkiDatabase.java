@@ -37,7 +37,7 @@ public class AnkiDatabase {
                 String tags = rs.getString("tags");
 
                 AnkiNote note = new AnkiNote(wordId, flds, tags);
-                System.out.printf("%25s <- %s\n", note.getWord(), note.getFlds());
+                //System.out.printf("%25s <- %s\n", note.getWord(), note.getFlds());
                 notesWithoutPron.add(note);
             }
         } catch (SQLException e) {
