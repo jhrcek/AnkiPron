@@ -2,7 +2,7 @@ package cz.janhrcek.ankipron;
 
 import cz.janhrcek.ankipron.search.SearchResult;
 import cz.janhrcek.ankipron.search.Searcher;
-import cz.janhrcek.ankipron.search.dwds.DWDS;
+import cz.janhrcek.ankipron.search.duden.Duden;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,13 +24,13 @@ public class PronDownloader {
         List<String> pronNotAvailable = new ArrayList<>();
         List<String> unknownErrors = new ArrayList<>();
 
-        Searcher dwds = new DWDS(new FirefoxDriver());
+        Searcher searcher = new Duden(new FirefoxDriver());
 
         for (String word : wordsToDownload) {
-            SearchResult sr = dwds.search(word);
+            SearchResult sr = searcher.search(word);
             switch (sr) {
                 case PRON_FOUND:
-                    word2pronURL.put(word, dwds.getPronURL());
+                    word2pronURL.put(word, searcher.getPronURL());
                     break;
                 case WORD_NOT_FOUND:
                     wordsNotFound.add(word);
@@ -43,7 +43,7 @@ public class PronDownloader {
             }
         }
 
-        dwds.close();
+        searcher.close();
 
         //Phase 2: download prons based on URL
         for (Map.Entry<String, String> entry : word2pronURL.entrySet()) {

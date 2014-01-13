@@ -43,6 +43,7 @@ public class AnkiDatabase {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+
         return notesWithoutPron;
     }
 
@@ -59,7 +60,7 @@ public class AnkiDatabase {
         return wordsToSearch;
     }
 
-    private void addMp3ReferencesToAnkiDb(List<AnkiNote> downloadedProns) {
+    public void addMp3ReferencesToAnkiDb(List<AnkiNote> downloadedProns) {
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + Project.getAnkiDb())) {
             for (AnkiNote note : downloadedProns) {
                 if (getMp3File(note.getWord()).exists()) {

@@ -12,8 +12,13 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        verifyAnkiNotesIntegrity();
-        downloadMp3sForWords();
+
+        //Use case 1: for words without pron, download the prons
+        //verifyAnkiNotesIntegrity();
+        //downloadMp3sForWords();
+        
+        //Use case 2: having pron mp3s downloaded, add references to them to anki db
+        addMp3RefsToAnkiDb();
     }
 
     public static void downloadMp3sForWords() throws IOException, ClassNotFoundException {
@@ -35,6 +40,12 @@ public class Main {
 
         PronDownloader downloader = new PronDownloader();
         downloader.performDownload(wordsWithoutPron);
+    }
+
+    public static void addMp3RefsToAnkiDb() throws ClassNotFoundException {
+        AnkiDatabase db = new AnkiDatabase();
+        List<AnkiNote> notesWithoutPron = db.getNotesWithoutPron();
+        db.addMp3ReferencesToAnkiDb(notesWithoutPron);
     }
 
     /**
