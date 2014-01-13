@@ -46,8 +46,12 @@ public class PronDownloader {
         searcher.close();
 
         //Phase 2: download prons based on URL
+        List<String> failedRenames = new ArrayList<>();
         for (Map.Entry<String, String> entry : word2pronURL.entrySet()) {
-            downloadAndRenamePronFile(entry.getKey(), entry.getValue());
+            boolean downloadAndRenameSuccesfull = downloadAndRenamePronFile(entry.getKey(), entry.getValue());
+            if (!downloadAndRenameSuccesfull) {
+                failedRenames.add(entry.getKey());
+            }
         }
 
         System.out.println("----- REPORT -----");
@@ -63,12 +67,16 @@ public class PronDownloader {
         if (!unknownErrors.isEmpty()) {
             System.out.printf("UNKNOWN ERRORS : %d %s%n", unknownErrors.size(), unknownErrors);
         }
+        if (!failedRenames.isEmpty()) {
+            System.out.printf("FAILED TO RENAME: %d %s%n", failedRenames.size(), failedRenames);
+        }
     }
 
-    private void downloadAndRenamePronFile(String word, String pronUrl) {
+    private boolean downloadAndRenamePronFile(String word, String pronUrl) {
         ProcessBuilder pb = new ProcessBuilder("wget", pronUrl);
         pb.directory(Project.getDownloadDir());
 
+        boolean renameSuccessfull = false;
         Process p;
         try {
             p = pb.start();
@@ -79,13 +87,12 @@ public class PronDownloader {
             File downloadedPronFile = new File(Project.getDownloadDir(), expectedFilename);
             System.out.println("Checking for presence of '" + expectedFilename + (downloadedPronFile.exists()
                     ? "' - OK, present" : "' - NOT PRESENT!"));
-
-            downloadedPronFile.renameTo(new File(Project.getDownloadDir(), word + ".mp3"));
-
+            renameSuccessfull = downloadedPronFile.renameTo(new File(Project.getDownloadDir(), word + ".mp3"));
         } catch (IOException | InterruptedException ex) {
             System.err.
                     println("Error downloading pron for '" + word + "' from URL '" + pronUrl + "' because of \n" + ex);
         }
+        return renameSuccessfull;
     }
 
     private static String getSimpleFilename(String url) {

@@ -27,10 +27,9 @@ public class AnkiDatabase {
 
     public List<AnkiNote> getNotesWithoutPron() {
         List<AnkiNote> notesWithoutPron = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + Project.getAnkiDb())) {
-
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery(WORDS_WITHOUT_PRON_QUERY);
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + Project.getAnkiDb());
+                Statement statement = conn.createStatement();
+                ResultSet rs = statement.executeQuery(WORDS_WITHOUT_PRON_QUERY)) {
             while (rs.next()) {
                 long wordId = rs.getLong("id");
                 String flds = rs.getString("flds");
@@ -97,7 +96,7 @@ public class AnkiDatabase {
                 .append(FIELD_SEPARATOR).append(fields[2])
                 .append(FIELD_SEPARATOR).append(fields[3]);
 
-        System.out.printf("    - updated flds : '%s'\n", newFlds);
+        System.out.printf("    - updated flds : '%s'%n", newFlds);
         return newFlds.toString();
     }
 }
