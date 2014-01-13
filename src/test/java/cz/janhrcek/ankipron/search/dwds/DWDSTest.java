@@ -3,6 +3,7 @@ package cz.janhrcek.ankipron.search.dwds;
 import cz.janhrcek.ankipron.search.SearchResult;
 import cz.janhrcek.ankipron.search.Searcher;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -59,5 +60,12 @@ public class DWDSTest {
     private void assertResutlAndPronURL(String word, SearchResult searchResult, String pronUrl) {
         assertEquals(dwds.search(word), searchResult);
         assertEquals(dwds.getPronURL(), pronUrl);
+    }
+
+    @AfterClass
+    public void closeDwds() {
+        if (dwds != null) {
+            dwds.close();
+        }
     }
 }

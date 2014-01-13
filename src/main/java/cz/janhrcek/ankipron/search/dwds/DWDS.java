@@ -40,7 +40,7 @@ public class DWDS implements Searcher {
     public SearchResult search(String word) {
         Objects.requireNonNull(word, "aWord must not be null!");
         pronUrl = null;
-        System.out.print("Processing word " + ++counter + ": '" + word + "' - ");
+        System.out.print("Searching word " + ++counter + ": '" + word + "' - ");
         driver.findElement(SEARCH_INPUT).clear();
         driver.findElement(SEARCH_INPUT).sendKeys(word);
         driver.findElement(SEARCH_SUBMIT).click();

@@ -62,7 +62,7 @@ public class WordExtractor {
             }
 
             if (deutsch.split(" ").length != 1) {
-                System.out.println("WARNING - problems when extracting word: '" + deutsch + "'");
+                System.out.println("WARNING - can't extract word: '" + deutsch + "'");
                 return null;
             }
         }
