@@ -71,7 +71,7 @@ public class Main {
 
             //No special characters in words!
             String word = note.getWord();
-            if (word != null && (word.contains("<") || word.contains(" ") || word.contains(">"))) {
+            if (word != null && (word.contains("<") || word.contains(" ") || word.contains(">") || word.contains("­"))) {
                 System.out.println(note);
             }
         }

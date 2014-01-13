@@ -17,8 +17,7 @@ public class AnkiDatabase {
 
     //Select all visible fields of notes, that contain flag wort, but don't have mp3 file associated with them
     private static final String WORDS_WITHOUT_PRON_QUERY
-           // = "select id,tags,flds,sfld from notes where tags like '%wort%' and flds not like '%.mp3%';";
-            = "select id,tags,flds,sfld from notes where tags like '%wort%';";
+            = "select id,tags,flds,sfld from notes where tags like '%wort%' and flds not like '%.mp3%';";
     private static final String WORD_UPDATE_QUERY = "update notes set flds=? where id=?";
     private final WordExtractor extractor = new WordExtractor();
 
@@ -38,7 +37,7 @@ public class AnkiDatabase {
                 String tags = rs.getString("tags");
 
                 AnkiNote note = new AnkiNote(wordId, flds, tags);
-               // System.out.printf("%25s <- %s\n", note.getWord(), note.getFlds());
+                System.out.printf("%25s <- %s\n", note.getWord(), note.getFlds());
                 notesWithoutPron.add(note);
             }
         } catch (SQLException e) {
