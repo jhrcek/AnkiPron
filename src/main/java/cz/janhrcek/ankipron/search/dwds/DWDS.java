@@ -1,5 +1,7 @@
-package cz.janhrcek.ankipron.dwds;
+package cz.janhrcek.ankipron.search.dwds;
 
+import cz.janhrcek.ankipron.search.SearchResult;
+import cz.janhrcek.ankipron.search.Searcher;
 import java.util.List;
 import java.util.Objects;
 import org.openqa.selenium.By;
@@ -7,7 +9,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -16,7 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  *
  * @author jhrcek
  */
-public class DWDS {
+public class DWDS implements Searcher {
 
     private final WebDriver driver;
     private static final By SEARCH_INPUT = By.cssSelector("#query_fast_search");
@@ -29,25 +30,13 @@ public class DWDS {
     private String pronUrl = null;
     private int counter = 0;
 
-    public DWDS() {
-        driver = new FirefoxDriver();
+    public DWDS(WebDriver driver) {
+        this.driver = Objects.requireNonNull(driver);
         performInitialSearch();
         closeUnwantedPanels();
     }
 
-    private void performInitialSearch() {
-        driver.get("http://www.dwds.de/?qu=und");
-        waitForPageLoad();
-    }
-
-    private void closeUnwantedPanels() {
-        List<WebElement> closeImages;
-        do {
-            closeImages = driver.findElements(PANEL_CLOSER);
-            closeImages.get(1).click();
-        } while (closeImages.size() > 2);
-    }
-
+    @Override
     public SearchResult search(String word) {
         Objects.requireNonNull(word, "aWord must not be null!");
         pronUrl = null;
@@ -62,10 +51,10 @@ public class DWDS {
             try {
                 driver.findElement(PRONOUNCIATION);
                 pronUrl = getAudioURL();
-                System.out.println("Aussprache URL: " + pronUrl);
+                System.out.println("Pron URL: " + pronUrl);
                 return SearchResult.PRON_FOUND;
             } catch (NoSuchElementException ex) { //Word in dictionary, but no pronounciation available
-                System.out.println("Aussprache nicht vorhanden");
+                System.out.println("Pron NOT available");
                 return SearchResult.PRON_NOT_AVAILABLE;
             }
         } catch (TimeoutException | NoSuchElementException ex) { //Word not in the dictionary
@@ -74,22 +63,23 @@ public class DWDS {
                 System.out.println(notFoundElems.get(0).getText());
                 return SearchResult.WORD_NOT_FOUND;
             }
-
         }
         return SearchResult.UNKNOWN;
+    }
+
+    @Override
+    public String getPronURL() {
+        return pronUrl;
+    }
+
+    @Override
+    public void close() {
+        driver.close();
     }
 
     private void waitForPageLoad() {
         new WebDriverWait(driver, 5, 100).until(
                 ExpectedConditions.not(ExpectedConditions.presenceOfAllElementsLocatedBy(PANEL_LOADING)));
-    }
-
-    public enum SearchResult {
-
-        PRON_FOUND,
-        PRON_NOT_AVAILABLE,
-        WORD_NOT_FOUND,
-        UNKNOWN;
     }
 
     private String getAudioURL() {
@@ -98,11 +88,16 @@ public class DWDS {
         return flashvars.substring(mediaUrlBeginIndex);
     }
 
-    public String getPronURL() {
-        return pronUrl;
+    private void performInitialSearch() {
+        driver.get("http://www.dwds.de/?qu=und");
+        waitForPageLoad();
     }
 
-    public void close() {
-        driver.close();
+    private void closeUnwantedPanels() {
+        List<WebElement> closeImages;
+        do {
+            closeImages = driver.findElements(PANEL_CLOSER);
+            closeImages.get(1).click();
+        } while (closeImages.size() > 2);
     }
 }

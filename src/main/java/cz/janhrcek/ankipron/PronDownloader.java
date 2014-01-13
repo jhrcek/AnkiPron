@@ -1,16 +1,19 @@
 package cz.janhrcek.ankipron;
 
-import cz.janhrcek.ankipron.dwds.DWDS;
+import cz.janhrcek.ankipron.search.SearchResult;
+import cz.janhrcek.ankipron.search.Searcher;
+import cz.janhrcek.ankipron.search.dwds.DWDS;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
-import static cz.janhrcek.ankipron.dwds.DWDS.SearchResult.PRON_FOUND;
-import static cz.janhrcek.ankipron.dwds.DWDS.SearchResult.PRON_NOT_AVAILABLE;
-import static cz.janhrcek.ankipron.dwds.DWDS.SearchResult.WORD_NOT_FOUND;
+import static cz.janhrcek.ankipron.search.SearchResult.PRON_FOUND;
+import static cz.janhrcek.ankipron.search.SearchResult.PRON_NOT_AVAILABLE;
+import static cz.janhrcek.ankipron.search.SearchResult.WORD_NOT_FOUND;
 
 public class PronDownloader {
 
@@ -21,10 +24,10 @@ public class PronDownloader {
         List<String> pronNotAvailable = new ArrayList<>();
         List<String> unknownErrors = new ArrayList<>();
 
-        DWDS dwds = new DWDS();
+        Searcher dwds = new DWDS(new FirefoxDriver());
 
         for (String word : wordsToDownload) {
-            DWDS.SearchResult sr = dwds.search(word);
+            SearchResult sr = dwds.search(word);
             switch (sr) {
                 case PRON_FOUND:
                     word2pronURL.put(word, dwds.getPronURL());
