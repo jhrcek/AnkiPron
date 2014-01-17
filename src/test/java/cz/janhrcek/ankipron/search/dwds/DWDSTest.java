@@ -1,5 +1,6 @@
 package cz.janhrcek.ankipron.search.dwds;
 
+import cz.janhrcek.ankipron.search.DWDS;
 import cz.janhrcek.ankipron.search.SearchResult;
 import cz.janhrcek.ankipron.search.Searcher;
 import org.openqa.selenium.firefox.FirefoxDriver;

@@ -1,7 +1,5 @@
-package cz.janhrcek.ankipron.search.duden;
+package cz.janhrcek.ankipron.search;
 
-import cz.janhrcek.ankipron.search.SearchResult;
-import cz.janhrcek.ankipron.search.Searcher;
 import java.util.List;
 import java.util.Objects;
 import org.openqa.selenium.By;

@@ -1,8 +1,8 @@
 package cz.janhrcek.ankipron;
 
+import cz.janhrcek.ankipron.search.DWDS;
 import cz.janhrcek.ankipron.search.SearchResult;
 import cz.janhrcek.ankipron.search.Searcher;
-import cz.janhrcek.ankipron.search.duden.Duden;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class PronDownloader {
         List<String> pronNotAvailable = new ArrayList<>();
         List<String> unknownErrors = new ArrayList<>();
 
-        Searcher searcher = new Duden(new FirefoxDriver());
+        Searcher searcher = new DWDS(new FirefoxDriver());
 
         for (String word : wordsToDownload) {
             SearchResult sr = searcher.search(word);
