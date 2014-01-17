@@ -15,9 +15,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  *
  * @author jhrcek
  */
-public class DWDS implements Searcher {
+public class DWDS extends AbstractSearcher {
 
-    private final WebDriver driver;
     private static final By SEARCH_INPUT = By.id("query_fast_search");
     private static final By SEARCH_SUBMIT = By.id("searchbar_submit");
     private static final By PANEL_LOADING = By.cssSelector(".panel_loading");
@@ -25,11 +24,8 @@ public class DWDS implements Searcher {
     private static final By WORD_FOUND = By.cssSelector(".wb_lzga");
     private static final By PANEL_CLOSER = By.cssSelector(".panel_remove>img");
 
-    private String pronUrl = null;
-    private int counter = 0;
-
     public DWDS(WebDriver driver) {
-        this.driver = Objects.requireNonNull(driver);
+        super(driver);
         performInitialSearch();
         closeUnwantedPanels();
     }
@@ -63,16 +59,6 @@ public class DWDS implements Searcher {
             }
         }
         return SearchResult.UNKNOWN;
-    }
-
-    @Override
-    public String getPronURL() {
-        return pronUrl;
-    }
-
-    @Override
-    public void close() {
-        driver.close();
     }
 
     private void waitForPageLoad() {

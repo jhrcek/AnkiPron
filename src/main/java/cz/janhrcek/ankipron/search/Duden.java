@@ -8,23 +8,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
- * Represents www.duden.de online korpus.
+ * Represents www.duden.de online corpus.
  *
  * @author jhrcek
  */
-public class Duden implements Searcher {
+public class Duden extends AbstractSearcher {
 
-    private final WebDriver driver;
     private static final String RESTSCHREIBUNG_URL = "http://www.duden.de/rechtschreibung/";
     private static final By PRONOUNCIATION = By.cssSelector("#mp3_mini_1 a[title^='Als mp3']");
-
     private static final By WORD_FOUND = By.cssSelector(".lemma");
 
-    private String pronUrl = null;
-    private int counter = 0;
-
     public Duden(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     @Override
@@ -38,7 +33,7 @@ public class Duden implements Searcher {
             driver.findElement(WORD_FOUND);
             try {
                 pronUrl = driver.findElement(PRONOUNCIATION).getAttribute("href");
-                System.out.println(pronUrl);
+                System.out.println("Pron URL: " + pronUrl);
                 return SearchResult.PRON_FOUND;
             } catch (NoSuchElementException nse) { //word in dict, but pron not available
                 System.out.println("Pron NOT available");
@@ -63,15 +58,5 @@ public class Duden implements Searcher {
                 .replaceAll("ö", "oe")
                 .replaceAll("Ü", "Ue")
                 .replaceAll("ü", "ue");
-    }
-
-    @Override
-    public String getPronURL() {
-        return pronUrl;
-    }
-
-    @Override
-    public void close() {
-        driver.close();
     }
 }
