@@ -33,6 +33,7 @@ public class Project {
 
     /**
      * @return list of words, which were found on DWDS, but which don't have pronunciation available
+     * @throws java.io.IOException
      */
     public static List<String> getWordsForWhichPronNotAvailable() throws IOException {
         return FileUtils.readLines(WORDS_FOR_WHICH_PRON_NOT_AVAILABLE);
@@ -40,6 +41,7 @@ public class Project {
 
     /**
      * @return list of words, which cannot be found on DWDS
+     * @throws java.io.IOException
      */
     public static List<String> getWordsNotFound() throws IOException {
         return FileUtils.readLines(WORDS_NOT_FOUND);

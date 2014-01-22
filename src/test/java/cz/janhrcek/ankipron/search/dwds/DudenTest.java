@@ -1,8 +1,8 @@
 package cz.janhrcek.ankipron.search.dwds;
 
+import cz.janhrcek.ankipron.search.Duden;
 import cz.janhrcek.ankipron.search.SearchResult;
 import cz.janhrcek.ankipron.search.Searcher;
-import cz.janhrcek.ankipron.search.Duden;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;

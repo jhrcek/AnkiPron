@@ -56,7 +56,7 @@ public class WordExtractor {
             deutsch = deutsch.replaceAll(PART_AFTER_DASH, "");
 
             //Remove article if present
-            Matcher matcher = null;
+            Matcher matcher;
             if ((matcher = SUBST_WITH_ARTICLE.matcher(deutsch)).matches()) {
                 deutsch = matcher.group(2);
             }

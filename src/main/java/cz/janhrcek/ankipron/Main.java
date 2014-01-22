@@ -12,7 +12,6 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-
         //Use case 1: for words without pron, download the prons
         verifyAnkiNotesIntegrity();
         //downloadMp3sForWords();

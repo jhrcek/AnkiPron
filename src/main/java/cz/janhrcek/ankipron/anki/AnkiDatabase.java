@@ -67,8 +67,6 @@ public class AnkiDatabase {
                         wordUpdate.setString(1, addMp3Reference(note.getFlds()));
                         wordUpdate.setLong(2, note.getId());
                         wordUpdate.execute();
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
                     }
                 }
             }
