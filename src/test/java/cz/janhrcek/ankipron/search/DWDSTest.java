@@ -1,8 +1,5 @@
-package cz.janhrcek.ankipron.search.dwds;
+package cz.janhrcek.ankipron.search;
 
-import cz.janhrcek.ankipron.search.DWDS;
-import cz.janhrcek.ankipron.search.SearchResult;
-import cz.janhrcek.ankipron.search.Searcher;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
@@ -35,17 +32,17 @@ public class DWDSTest {
     @Test
     public void pronFound() {
         assertResutlAndPronURL("Bruder", SearchResult.PRON_FOUND,
-                "http://media.dwds.de/dwds2/release/dd77b9664ee1ecfcb6170ae9a150f913.mp3");
+                "http://media.dwds.de/dwds2/release_new/b95beb60f8f6ca5f28cdc0685c469319.mp3");
         assertResutlAndPronURL("und", SearchResult.PRON_FOUND,
-                "http://media.dwds.de/dwds2/release/3b7763834e23ec5ea9c64a7052bf08ba.mp3");
+                "http://media.dwds.de/dwds2/release_new/5496cb3673a0e6f630ad7389c224971d.mp3");
         assertResutlAndPronURL("Abscheulichkeit", SearchResult.PRON_FOUND,
-                "http://media.dwds.de/dwds2/release/d60f4985bdce5e7aedd04a634a8836ac.mp3");
+                "http://media.dwds.de/dwds2/release_new/eadba7dfcc02656fa72fb8f9f31085a7.mp3");
     }
 
     @Test
     public void withouPronAfterWithPron() {
         assertResutlAndPronURL("und", SearchResult.PRON_FOUND,
-                "http://media.dwds.de/dwds2/release/3b7763834e23ec5ea9c64a7052bf08ba.mp3");
+                "http://media.dwds.de/dwds2/release_new/5496cb3673a0e6f630ad7389c224971d.mp3");
         //Make sure pron Url is nulled after successfull search
         assertResutlAndPronURL("Ärger", SearchResult.PRON_NOT_AVAILABLE, null);
     }
@@ -53,7 +50,7 @@ public class DWDSTest {
     @Test
     public void notFoundAfterWithPron() {
         assertResutlAndPronURL("und", SearchResult.PRON_FOUND,
-                "http://media.dwds.de/dwds2/release/3b7763834e23ec5ea9c64a7052bf08ba.mp3");
+                "http://media.dwds.de/dwds2/release_new/5496cb3673a0e6f630ad7389c224971d.mp3");
         //Make sure pron URL is nulled after successfull search
         assertResutlAndPronURL("nonexistent", SearchResult.WORD_NOT_FOUND, null);
     }

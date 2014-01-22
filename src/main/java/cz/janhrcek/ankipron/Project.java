@@ -2,10 +2,9 @@ package cz.janhrcek.ankipron;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.io.FileUtils;
+import java.util.Scanner;
 
 /**
  *
@@ -15,8 +14,6 @@ public class Project {
 
     private static final File ROOT_DIR = new File("/home/jhrcek/Temp/AnkiDeutschPron/");
     private static final File DOWNLOAD_DIR = new File(ROOT_DIR, "Downloaded");
-    private static final File WORDS_FOR_WHICH_PRON_NOT_AVAILABLE = new File(ROOT_DIR, "pron_not_available.txt");
-    private static final File WORDS_NOT_FOUND = new File(ROOT_DIR, "words_not_found.txt");
     private static final File ANKI_DB = new File(ROOT_DIR, "collection.anki2");
 
     public static File getRootDir() {
@@ -33,18 +30,16 @@ public class Project {
 
     /**
      * @return list of words, which were found on DWDS, but which don't have pronunciation available
-     * @throws java.io.IOException
      */
-    public static List<String> getWordsForWhichPronNotAvailable() throws IOException {
-        return FileUtils.readLines(WORDS_FOR_WHICH_PRON_NOT_AVAILABLE);
+    public static List<String> getWordsForWhichPronNotAvailable() {
+        return readLines("pron_not_available.txt");
     }
 
     /**
      * @return list of words, which cannot be found on DWDS
-     * @throws java.io.IOException
      */
-    public static List<String> getWordsNotFound() throws IOException {
-        return FileUtils.readLines(WORDS_NOT_FOUND);
+    public static List<String> getWordsNotFound() {
+        return readLines("words_not_found.txt");
     }
 
     /**
@@ -64,5 +59,16 @@ public class Project {
             wordsDownloaded.add(filename.substring(0, filename.indexOf(".")));
         }
         return wordsDownloaded;
+    }
+
+    private static List<String> readLines(String resouce) {
+        Scanner scanner = new Scanner(Project.class.getResourceAsStream(resouce));
+        List<String> lines = new ArrayList<>(500);
+
+        while (scanner.hasNextLine()) {
+            lines.add(scanner.nextLine());
+        }
+
+        return lines;
     }
 }
