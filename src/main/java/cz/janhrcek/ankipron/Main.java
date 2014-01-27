@@ -54,22 +54,23 @@ public class Main {
         List<AnkiNote> notesWithoutPron = new AnkiDatabase().getNotesWithoutPron();
         for (AnkiNote note : notesWithoutPron) {
             String deutsch = note.getDeutsch();
+            String tags = note.getTags();
             String articleError = "Note has flag %s, but does not start with %s: %s%n";
             //Notes with tag Femininum must have german field starting with e or r/e
-            if (note.getTags().contains("Femininum")
+            if (tags.contains("Femininum")
                     && !(deutsch.startsWith("e ") || deutsch.startsWith("r/e "))) {
                 System.err.printf(articleError, "Femininum", "e or r/e", note);
             }
 
             //Notes with tag Maskulinum must start with r or r/e or r/s
-            if (note.getTags().contains("Maskulinum")
+            if (tags.contains("Maskulinum")
                     && !(deutsch.startsWith("r ") || deutsch.startsWith("r/e ")
                     || deutsch.startsWith("r/s "))) {
                 System.err.printf(articleError, "Maskulinum", "r or r/e", note);
             }
 
             //Notes with tag Neutrum must start with s or (s)
-            if (note.getTags().contains("Neutrum")
+            if (tags.contains("Neutrum")
                     && !(deutsch.startsWith("s ") || deutsch.startsWith("(s) ")
                     || deutsch.startsWith("r/s "))) {
                 System.err.printf(articleError, "Neutrum", "s or (s)", note);
@@ -84,6 +85,12 @@ public class Main {
             String word = note.getWord();
             if (word != null && (word.contains("<") || word.contains(" ") || word.contains(">") || word.contains("­"))) {
                 System.err.printf("Note contains one of characters <, ,>,-: %s%n", note);
+            }
+
+            //When note has Maskulinum, Femininum or Neutrum, then it must have wort
+            if ((tags.contains("Maskulinum") || tags.contains("Femininum") || tags.contains("Neutrum"))
+                    && !tags.contains("wort")) {
+                System.err.printf("Note has Maskulinu, Femininum or Neutrum, but doesn't have wort: %s%n", note);
             }
         }
     }

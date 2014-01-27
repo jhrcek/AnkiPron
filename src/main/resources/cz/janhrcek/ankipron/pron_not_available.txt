@@ -145,6 +145,7 @@ ringsum
 Rohkost
 Ruhestatt
 S-Bahn
+Schicht
 Schiffbau
 Schiffbauer
 schlüpfen
@@ -152,6 +153,7 @@ Schultasche
 Schweinebraten
 Schwule
 selbst
+Skala
 sonst
 Star
 Straßenbahnschiene
