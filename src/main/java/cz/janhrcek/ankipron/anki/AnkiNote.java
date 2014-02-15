@@ -1,5 +1,7 @@
 package cz.janhrcek.ankipron.anki;
 
+import static cz.janhrcek.ankipron.anki.WordExtractor.FIELD_SEPARATOR;
+
 /**
  *
  * @author jhrcek
@@ -37,8 +39,29 @@ public class AnkiNote {
         return extractor.getFields(flds)[1];
     }
 
+    /**
+     * @return flds field with reference to mp3 file corresponding to the german word added
+     */
+    public String getFldsWithMp3Reference() {
+        String[] fields = extractor.getFields(flds);
+        String mp3FileName = getWord() + ".mp3";
+
+        StringBuilder newFlds = new StringBuilder()
+                .append(fields[0]).append(FIELD_SEPARATOR)
+                .append(fields[1]).append("[sound:").append(mp3FileName).append("]").append(FIELD_SEPARATOR)
+                .append(fields[2]).append(FIELD_SEPARATOR)
+                .append(fields[3]);
+
+        System.out.printf("    - updated flds : '%s'%n", newFlds);
+        return newFlds.toString();
+    }
+
     @Override
     public String toString() {
-        return "AnkiNote{flds='" + flds + "', tags='" + tags + "', id=" + id + "}";
+        return new StringBuilder()
+                .append("AnkiNote{flds='").append(flds)
+                .append("', tags='").append(tags)
+                .append("', id=").append(id).append("}")
+                .toString();
     }
 }
