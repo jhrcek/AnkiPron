@@ -5,6 +5,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
 
 /**
  *
@@ -16,48 +19,50 @@ public class DWDSTest {
 
     @Test
     public void wordWithoutPron() {
-        assertResutlAndPronURL("Ärger", SearchResult.PRON_NOT_AVAILABLE, null);
-        assertResutlAndPronURL("Konzentrationslager", SearchResult.PRON_NOT_AVAILABLE, null);
-        assertResutlAndPronURL("zweifellos", SearchResult.PRON_NOT_AVAILABLE, null);
+        assertResutlAndPronURL("Ärger", SearchResult.PRON_NOT_AVAILABLE, false);
+        assertResutlAndPronURL("Konzentrationslager", SearchResult.PRON_NOT_AVAILABLE, false);
+        assertResutlAndPronURL("zweifellos", SearchResult.PRON_NOT_AVAILABLE, false);
     }
 
     @Test
     public void wordNotFound() {
-        assertResutlAndPronURL("nonexistent", SearchResult.WORD_NOT_FOUND, null);
-        assertResutlAndPronURL("abführend", SearchResult.WORD_NOT_FOUND, null);
-        assertResutlAndPronURL("Aufenthaltszimmer", SearchResult.WORD_NOT_FOUND, null);
-        assertResutlAndPronURL("letztendlich", SearchResult.WORD_NOT_FOUND, null);
+        assertResutlAndPronURL("nonexistent", SearchResult.WORD_NOT_FOUND, false);
+        assertResutlAndPronURL("abführend", SearchResult.WORD_NOT_FOUND, false);
+        assertResutlAndPronURL("Aufenthaltszimmer", SearchResult.WORD_NOT_FOUND, false);
+        assertResutlAndPronURL("letztendlich", SearchResult.WORD_NOT_FOUND, false);
     }
 
     @Test
     public void pronFound() {
-        assertResutlAndPronURL("Bruder", SearchResult.PRON_FOUND,
-                "http://media.dwds.de/dwds2/release_new/b95beb60f8f6ca5f28cdc0685c469319.mp3");
-        assertResutlAndPronURL("und", SearchResult.PRON_FOUND,
-                "http://media.dwds.de/dwds2/release_new/5496cb3673a0e6f630ad7389c224971d.mp3");
-        assertResutlAndPronURL("Abscheulichkeit", SearchResult.PRON_FOUND,
-                "http://media.dwds.de/dwds2/release_new/eadba7dfcc02656fa72fb8f9f31085a7.mp3");
+        assertResutlAndPronURL("Bruder", SearchResult.PRON_FOUND, true);
+        assertResutlAndPronURL("und", SearchResult.PRON_FOUND, true);
+        assertResutlAndPronURL("Abscheulichkeit", SearchResult.PRON_FOUND, true);
     }
 
     @Test
     public void withouPronAfterWithPron() {
-        assertResutlAndPronURL("und", SearchResult.PRON_FOUND,
-                "http://media.dwds.de/dwds2/release_new/5496cb3673a0e6f630ad7389c224971d.mp3");
+        assertResutlAndPronURL("und", SearchResult.PRON_FOUND, true);
         //Make sure pron Url is nulled after successfull search
-        assertResutlAndPronURL("Ärger", SearchResult.PRON_NOT_AVAILABLE, null);
+        assertResutlAndPronURL("Ärger", SearchResult.PRON_NOT_AVAILABLE, false);
     }
 
     @Test
     public void notFoundAfterWithPron() {
-        assertResutlAndPronURL("und", SearchResult.PRON_FOUND,
-                "http://media.dwds.de/dwds2/release_new/5496cb3673a0e6f630ad7389c224971d.mp3");
+        assertResutlAndPronURL("und", SearchResult.PRON_FOUND, true);
         //Make sure pron URL is nulled after successfull search
-        assertResutlAndPronURL("nonexistent", SearchResult.WORD_NOT_FOUND, null);
+        assertResutlAndPronURL("nonexistent", SearchResult.WORD_NOT_FOUND, false);
     }
 
-    private void assertResutlAndPronURL(String word, SearchResult searchResult, String pronUrl) {
+    private void assertResutlAndPronURL(String word, SearchResult searchResult, boolean urlExpected) {
         assertEquals(dwds.search(word), searchResult);
-        assertEquals(dwds.getPronURL(), pronUrl);
+        String url = dwds.getPronURL();
+        if (urlExpected) {
+            assertNotNull(url);
+            assertTrue(url.startsWith("http://media.dwds.de/dwds2/"));
+            assertTrue(url.endsWith(".mp3"));
+        } else {
+            assertNull(url);
+        }
     }
 
     @AfterClass
