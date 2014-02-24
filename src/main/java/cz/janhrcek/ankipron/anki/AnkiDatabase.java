@@ -57,16 +57,25 @@ public class AnkiDatabase {
     }
 
     public void addMp3ReferencesToAnkiDb(List<AnkiNote> downloadedProns) {
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + Project.getAnkiDb())) {
+        int expectedUpdates = 0;
+        int realUpdates = 0;
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + Project.getAnkiDb());
+                PreparedStatement wordUpdate = conn.prepareStatement(WORD_UPDATE_QUERY)) {
+            conn.setAutoCommit(false);
             for (AnkiNote note : downloadedProns) {
                 if (getMp3File(note.getWord()).exists()) {
-                    try (PreparedStatement wordUpdate = conn.prepareStatement(WORD_UPDATE_QUERY)) {
-                        wordUpdate.setString(1, note.getFldsWithMp3Reference());
-                        wordUpdate.setLong(2, note.getId());
-                        wordUpdate.execute();
-                    }
+                    wordUpdate.setString(1, note.getFldsWithMp3Reference());
+                    wordUpdate.setLong(2, note.getId());
+                    wordUpdate.addBatch();
+                    expectedUpdates++;
                 }
             }
+            int[] updCounts = wordUpdate.executeBatch();
+            for (int updCount : updCounts) {
+                realUpdates += updCount;
+            }
+            System.out.printf("Expected updates = %d, Real updates = %s%n", expectedUpdates, realUpdates);
+            conn.commit();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
