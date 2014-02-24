@@ -28,6 +28,7 @@ CD
 CD-Player
 Dienstleister
 domestizieren
+Drecksack
 drogenabhängig
 durchtränkt
 E-Mail
@@ -36,6 +37,7 @@ Einkaufsmöglichkeiten
 Einzimmerwohnung
 Englischlehrerin
 entscheidend
+erigieren
 faszinierend
 Fernsehwerbung
 fiberhaft
@@ -65,6 +67,7 @@ Kaffe
 Klassenfahrt
 Klimawandel
 Klobürste
+Kontrazeption
 Kranke
 Langstrecke
 Lehrwerk
@@ -83,6 +86,7 @@ Ochs
 Orchesterprobe
 Pausenbrot
 Pizzeria
+Pragmatiker
 Pressesprecher
 Primitivling
 Radiowerbung
@@ -94,10 +98,12 @@ selbstständig
 skifahren
 Spielsache
 stechend
+Sterbehilfe
 stinkend
 Strafzettel
 Streitkraft
 sättigend
+Süßwaren
 T-Shirt
 Teilzeit
 trockennass
