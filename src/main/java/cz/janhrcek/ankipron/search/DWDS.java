@@ -18,7 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class DWDS extends AbstractSearcher {
 
     private static final By SEARCH_INPUT = By.id("query_fast_search");
-    private static final By SEARCH_SUBMIT = By.id("searchbar_submit");
+    private static final By SEARCH_SUBMIT = By.id("dwds_main_search_submit");
     private static final By PANEL_LOADING = By.cssSelector(".panel_loading");
     private static final By PRONOUNCIATION = By.id("oneBitInsert_1");
     private static final By WORD_FOUND = By.cssSelector(".wb_lzga");
@@ -52,7 +52,8 @@ public class DWDS extends AbstractSearcher {
                 return SearchResult.PRON_NOT_AVAILABLE;
             }
         } catch (TimeoutException | NoSuchElementException ex) { //Word not in the dictionary
-            List<WebElement> notFoundElems = driver.findElements(By.cssSelector("#panel_147 div.panel_empty"));
+            List<WebElement> notFoundElems = driver
+                    .findElements(By.xpath("//p[contains(text(),'Kein Eintrag vorhanden')]"));
             if (!notFoundElems.isEmpty()) {
                 System.out.println(notFoundElems.get(0).getText());
                 return SearchResult.WORD_NOT_FOUND;
