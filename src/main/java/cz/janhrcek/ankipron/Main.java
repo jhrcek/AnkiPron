@@ -2,9 +2,11 @@ package cz.janhrcek.ankipron;
 
 import cz.janhrcek.ankipron.anki.AnkiDatabase;
 import cz.janhrcek.ankipron.anki.AnkiNote;
+import cz.janhrcek.ankipron.search.Duden;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * @author jhrcek
@@ -37,7 +39,7 @@ public class Main {
         logCollectionInfo(withoutDownloadablePron, "Words that don't have downloadable pron", false);
         logCollectionInfo(wordsWithoutPron, "Words remaining to be downloaded", true);
 
-        PronDownloader downloader = new PronDownloader();
+        PronDownloader downloader = new PronDownloader(new Duden(new FirefoxDriver()));
         downloader.performDownload(wordsWithoutPron);
     }
 

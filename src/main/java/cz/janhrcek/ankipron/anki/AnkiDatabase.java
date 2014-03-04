@@ -74,8 +74,15 @@ public class AnkiDatabase {
             for (int updCount : updCounts) {
                 realUpdates += updCount;
             }
+
             System.out.printf("Expected updates = %d, Real updates = %s%n", expectedUpdates, realUpdates);
-            conn.commit();
+            if (realUpdates == expectedUpdates) {
+                conn.commit();
+            } else {
+                conn.rollback();
+                throw new IllegalStateException("Only " + realUpdates + " updates were done, but we were expecting "
+                        + expectedUpdates);
+            }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }

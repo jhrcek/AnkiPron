@@ -1,6 +1,9 @@
 package cz.janhrcek.ankipron;
 
-import cz.janhrcek.ankipron.search.DWDS;
+import static cz.janhrcek.ankipron.search.SearchResult.PRON_FOUND;
+import static cz.janhrcek.ankipron.search.SearchResult.PRON_NOT_AVAILABLE;
+import static cz.janhrcek.ankipron.search.SearchResult.WORD_NOT_FOUND;
+
 import cz.janhrcek.ankipron.search.SearchResult;
 import cz.janhrcek.ankipron.search.Searcher;
 import java.io.File;
@@ -9,13 +12,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.openqa.selenium.firefox.FirefoxDriver;
-
-import static cz.janhrcek.ankipron.search.SearchResult.PRON_FOUND;
-import static cz.janhrcek.ankipron.search.SearchResult.PRON_NOT_AVAILABLE;
-import static cz.janhrcek.ankipron.search.SearchResult.WORD_NOT_FOUND;
 
 public class PronDownloader {
+
+    private final Searcher searcher;
+
+    public PronDownloader(Searcher searcher) {
+        this.searcher = searcher;
+    }
 
     public void performDownload(List<String> wordsToDownload) {
         System.out.println(wordsToDownload.size() + " words to download");
@@ -23,8 +27,6 @@ public class PronDownloader {
         List<String> wordsNotFound = new ArrayList<>();
         List<String> pronNotAvailable = new ArrayList<>();
         List<String> unknownErrors = new ArrayList<>();
-
-        Searcher searcher = new DWDS(new FirefoxDriver());
 
         for (String word : wordsToDownload) {
             SearchResult sr = searcher.search(word);
