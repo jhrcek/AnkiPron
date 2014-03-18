@@ -19,6 +19,7 @@ Anhalter
 anhand
 Anlaufstelle
 anlocken
+anlügen
 Annexion
 anstatt
 Antlitz
@@ -121,6 +122,7 @@ importieren
 Interrogativpronomen
 irisch
 Irre
+jedoch
 jetzig
 Juli
 Knopfdruck
@@ -136,6 +138,7 @@ Maus
 Maßangabe
 Meeresblick
 Merkmal
+mild
 Mitgliedschaft
 Mittagsschicht
 Mittelalter
@@ -152,11 +155,13 @@ Pflaume
 Phiole
 Pilger
 Plan
+platzen
 Polizeiwache
 Positiv
 Praline
 preisgünstig
 Prophezeiung
+prähistorisch
 Prügel
 Pup
 Pädophile
