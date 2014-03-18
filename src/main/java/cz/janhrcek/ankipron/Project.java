@@ -62,13 +62,13 @@ public class Project {
     }
 
     private static List<String> readLines(String resouce) {
-        Scanner scanner = new Scanner(Project.class.getResourceAsStream(resouce));
-        List<String> lines = new ArrayList<>(500);
-
-        while (scanner.hasNextLine()) {
-            lines.add(scanner.nextLine());
+        List<String> lines;
+        try (Scanner scanner = new Scanner(Project.class.getResourceAsStream(resouce))) {
+            lines = new ArrayList<>(500);
+            while (scanner.hasNextLine()) {
+                lines.add(scanner.nextLine());
+            }
         }
-
         return lines;
     }
 }
