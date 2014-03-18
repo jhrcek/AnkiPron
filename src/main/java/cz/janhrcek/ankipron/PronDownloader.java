@@ -9,6 +9,7 @@ import cz.janhrcek.ankipron.search.Searcher;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,20 +58,16 @@ public class PronDownloader {
         }
 
         System.out.println("----- REPORT -----");
-        if (!word2pronURL.keySet().isEmpty()) {
-            System.out.printf("OK : %d %s%n", word2pronURL.keySet().size(), word2pronURL.keySet());
-        }
-        if (!wordsNotFound.isEmpty()) {
-            System.out.printf("NOT FOUND : %d %s%n", wordsNotFound.size(), wordsNotFound);
-        }
-        if (!pronNotAvailable.isEmpty()) {
-            System.out.printf("PRON NOT AVAILABLE : %d %s%n", pronNotAvailable.size(), pronNotAvailable);
-        }
-        if (!unknownErrors.isEmpty()) {
-            System.out.printf("UNKNOWN ERRORS : %d %s%n", unknownErrors.size(), unknownErrors);
-        }
-        if (!failedRenames.isEmpty()) {
-            System.out.printf("FAILED TO RENAME: %d %s%n", failedRenames.size(), failedRenames);
+        reportCollection("OK", word2pronURL.keySet());
+        reportCollection("NOT FOUND", wordsNotFound);
+        reportCollection("PRON NOT AVAILABLE", pronNotAvailable);
+        reportCollection("UNKNOWN ERRORS", unknownErrors);
+        reportCollection("FAILED TO RENAME", failedRenames);
+    }
+
+    private void reportCollection(String collectionName, Collection<String> collection) {
+        if (!collection.isEmpty()) {
+            System.out.printf("%s : %d %s%n", collectionName, collection.size(), collection);
         }
     }
 
