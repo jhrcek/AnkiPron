@@ -17,6 +17,7 @@ auffallend
 aufgrund
 ausschildern
 ausverkauft
+Ausweispapiere
 Badenhose
 Bandlaufwerk
 Barbiepuppe
@@ -26,6 +27,7 @@ Behinderte
 beschädigt
 bewölkt
 Blutabnahme
+Bratkäse
 Brünn
 Buchhalterin
 CD
@@ -36,11 +38,13 @@ Drecksack
 drogenabhängig
 durchtränkt
 E-Mail
+Eigengewichtübung
 Einbindung
 Einkaufsmöglichkeiten
 Einzimmerwohnung
 Englischlehrerin
 entscheidend
+Entwicklungswerkzeug
 erigieren
 faszinierend
 Fernsehwerbung
@@ -77,6 +81,7 @@ Kranke
 Kreativität
 Kroatien
 Langstrecke
+Laufzeitumgebung
 Lehrwerk
 Leistungsdruck
 letztendlich
@@ -107,6 +112,7 @@ Seidenhose
 selbstständig
 skifahren
 Spielsache
+Spielzeuggeschäft
 stechend
 Sterbehilfe
 stinkend
