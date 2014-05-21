@@ -8,9 +8,6 @@ import java.util.Collection;
 import java.util.List;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-/**
- * @author jhrcek
- */
 public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -79,7 +76,7 @@ public class Main {
             }
 
             //No nbsp; in notes!
-            if (deutsch.contains("nbsp;")) {
+            if (note.getFlds().contains("nbsp;")) {
                 System.err.printf("Note contains nbsp; :%s%n", note);
             }
 
