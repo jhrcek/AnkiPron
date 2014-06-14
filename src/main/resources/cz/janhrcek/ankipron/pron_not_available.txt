@@ -65,6 +65,7 @@ Creme
 das
 deinetwegen
 Dekolleté
+durchstehen
 Einfamilienhaus
 Einkaufszettel
 einmal
@@ -89,6 +90,7 @@ Fall
 farbenprächtig
 feige
 feindselig
+Firmenchef
 Flüsschen
 fort
 Foto
@@ -116,6 +118,8 @@ Glas
 grauen
 gut
 Handvoll
+Hausarzt
+heim
 herausgeben
 heute
 hinfallen
@@ -125,15 +129,18 @@ Hoden
 Hornisse
 Händeschütteln
 Häuschen
+Immunsystem
 Impfstoff
 importieren
 Innovation
+innovativ
 Interrogativpronomen
 irisch
 Irre
 jedoch
 jetzig
 Juli
+Kampfkunst
 Kassierer
 Klimaschutz
 Knopfdruck
@@ -178,6 +185,7 @@ Phiole
 Pilger
 Plan
 platzen
+Platzierung
 Polizeiwache
 Pommes
 Positiv
@@ -207,6 +215,7 @@ Schnittstelle
 Schultasche
 Schweinebraten
 Schwule
+Schwüle
 selbst
 selbstlos
 semantisch
@@ -221,6 +230,7 @@ stressig
 Stromausfall
 Studienfach
 Stundenkilometer
+Suchmaschine
 tafelfertig
 Teilchen
 Teleskop
@@ -252,6 +262,8 @@ verspotten
 verstört
 vielleicht
 vielversprechend
+vorbeibringen
+vorbeugen
 vorne
 wahrscheinlich
 was
@@ -262,6 +274,7 @@ weitaus
 weltweit
 wiedergutmachen
 Wiederverwertung
+Wirkstoff
 Zauberer
 Zehe
 zerlumpt

@@ -27,6 +27,7 @@ Behinderte
 beschädigt
 bewölkt
 Blutabnahme
+Bluthochdruck
 Bratkäse
 Brünn
 Buchhalterin
@@ -63,6 +64,7 @@ größenteils
 Haushaltswaren
 herunterladen
 Holz-Jo-jo
+Hostel
 Hänchenkeule
 Höfflichkeit
 Implementierung
@@ -86,6 +88,7 @@ Lehrwerk
 Leistungsdruck
 letztendlich
 Lieblingsrestaurant
+Limette
 Maustaste
 Mehrfahrtenkarte
 Mengeangabe
@@ -121,6 +124,7 @@ Streitkraft
 sättigend
 Süßwaren
 T-Shirt
+Tattoo
 Teilzeit
 trockennass
 Trockenpflaumen
