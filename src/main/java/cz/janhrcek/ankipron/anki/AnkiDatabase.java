@@ -1,7 +1,8 @@
 package cz.janhrcek.ankipron.anki;
 
 import cz.janhrcek.ankipron.Project;
-import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -63,7 +64,7 @@ public class AnkiDatabase {
                 PreparedStatement wordUpdate = conn.prepareStatement(WORD_UPDATE_QUERY)) {
             conn.setAutoCommit(false);
             for (AnkiNote note : downloadedProns) {
-                if (getMp3File(note.getWord()).exists()) {
+                if (Files.exists(getMp3File(note.getWord()))) {
                     wordUpdate.setString(1, note.getFldsWithMp3Reference());
                     wordUpdate.setLong(2, note.getId());
                     wordUpdate.addBatch();
@@ -88,7 +89,7 @@ public class AnkiDatabase {
         }
     }
 
-    private File getMp3File(String word) {
-        return new File(Project.getDownloadDir(), word + ".mp3");
+    private Path getMp3File(String word) {
+        return Project.getDownloadDir().resolve(word + ".mp3");
     }
 }

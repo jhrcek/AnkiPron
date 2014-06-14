@@ -56,8 +56,7 @@ public class Main {
             String tags = note.getTags();
             String articleError = "Note has flag %s, but does not start with %s: %s%n";
             //Notes with tag Femininum must have german field starting with e or r/e
-            if (tags.contains("Femininum")
-                    && !(deutsch.startsWith("e ") || deutsch.startsWith("r/e "))) {
+            if (tags.contains("Femininum") && !(deutsch.startsWith("e ") || deutsch.startsWith("r/e "))) {
                 System.err.printf(articleError, "Femininum", "e or r/e", note);
             }
 

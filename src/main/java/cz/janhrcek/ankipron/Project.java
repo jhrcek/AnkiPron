@@ -1,30 +1,30 @@
 package cz.janhrcek.ankipron;
 
-import java.io.File;
-import java.io.FilenameFilter;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-/**
- *
- * @author jhrcek
- */
 public class Project {
 
-    private static final File ROOT_DIR = new File("/home/jhrcek/Temp/AnkiDeutschPron/");
-    private static final File DOWNLOAD_DIR = new File(ROOT_DIR, "Downloaded");
-    private static final File ANKI_DB = new File(ROOT_DIR, "collection.anki2");
+    private static final Path ROOT_DIR = Paths.get("/home/jhrcek/Temp/AnkiDeutschPron/");
+    private static final Path DOWNLOAD_DIR = ROOT_DIR.resolve("Downloaded");
+    private static final Path ANKI_DB = ROOT_DIR.resolve("collection.anki2");
 
-    public static File getRootDir() {
+    public static Path getRootDir() {
         return ROOT_DIR;
     }
 
-    public static File getDownloadDir() {
+    public static Path getDownloadDir() {
         return DOWNLOAD_DIR;
     }
 
-    public static File getAnkiDb() {
+    public static Path getAnkiDb() {
         return ANKI_DB;
     }
 
@@ -45,30 +45,22 @@ public class Project {
     /**
      * @return a list of words, for which downloaded .mp3 files exist in the download dir
      */
-    public static List<String> getWordsDownloaded() {
+    public static List<String> getWordsDownloaded() throws IOException {
         List<String> wordsDownloaded = new ArrayList<>();
-        File[] mp3FilesInDownloadDir = DOWNLOAD_DIR.listFiles(new FilenameFilter() {
-
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.endsWith(".mp3");
-            }
-        });
-        for (File mp3 : mp3FilesInDownloadDir) {
-            String filename = mp3.getName();
+        DirectoryStream<Path> mp3FilesInDownloadDir = Files.newDirectoryStream(DOWNLOAD_DIR, "*.mp3");
+        for (Path mp3 : mp3FilesInDownloadDir) {
+            String filename = mp3.getFileName().toString();
             wordsDownloaded.add(filename.substring(0, filename.indexOf(".")));
         }
         return wordsDownloaded;
     }
 
-    private static List<String> readLines(String resouce) {
-        List<String> lines;
-        try (Scanner scanner = new Scanner(Project.class.getResourceAsStream(resouce))) {
-            lines = new ArrayList<>(500);
-            while (scanner.hasNextLine()) {
-                lines.add(scanner.nextLine());
-            }
+    private static List<String> readLines(String resource) {
+        try {
+            Path resPath = Paths.get(Project.class.getResource(resource).toURI());
+            return Files.readAllLines(resPath, StandardCharsets.UTF_8);
+        } catch (IOException | URISyntaxException ex) {
+            throw new IllegalStateException("Failed to read resource " + resource);
         }
-        return lines;
     }
 }

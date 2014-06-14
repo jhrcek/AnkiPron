@@ -6,8 +6,9 @@ import static cz.janhrcek.ankipron.search.SearchResult.WORD_NOT_FOUND;
 
 import cz.janhrcek.ankipron.search.SearchResult;
 import cz.janhrcek.ankipron.search.Searcher;
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -73,28 +74,32 @@ public class PronDownloader {
 
     private boolean downloadAndRenamePronFile(String word, String pronUrl) {
         ProcessBuilder pb = new ProcessBuilder("wget", pronUrl);
-        pb.directory(Project.getDownloadDir());
+        pb.directory(Project.getDownloadDir().toFile());
 
-        boolean renameSuccessfull = false;
-        Process p;
+        boolean dldAndRenameSuccessfull = false;
         try {
-            p = pb.start();
-            System.out.println("Downloading pronunciation of word '" + word + "' from URL '" + pronUrl + "'");
-            p.waitFor();
+            Process wget = pb.start();
+            System.out.printf("Downloading '%s'%n", pronUrl);
+            wget.waitFor();
 
-            String expectedFilename = getSimpleFilename(pronUrl);
-            File downloadedPronFile = new File(Project.getDownloadDir(), expectedFilename);
-            System.out.println("Checking for presence of '" + expectedFilename + (downloadedPronFile.exists()
-                    ? "' - OK, present" : "' - NOT PRESENT!"));
-            renameSuccessfull = downloadedPronFile.renameTo(new File(Project.getDownloadDir(), word + ".mp3"));
+            rename(word, pronUrl);
+
+            dldAndRenameSuccessfull = true;
         } catch (IOException | InterruptedException ex) {
-            System.err.
-                    println("Error downloading pron for '" + word + "' from URL '" + pronUrl + "' because of \n" + ex);
+            System.err.printf("Error downloading pron for '%s' from URL '%s' :%s%n", word, pronUrl, ex);
         }
-        return renameSuccessfull;
+        return dldAndRenameSuccessfull;
     }
 
-    private static String getSimpleFilename(String url) {
-        return url.substring(url.lastIndexOf("/"));
+    private void rename(String word, String pronUrl) throws IOException {
+        String fileName = extractFileName(pronUrl);
+        Path from = Project.getDownloadDir().resolve(fileName);
+        Path to = Project.getDownloadDir().resolve(word + ".mp3");
+        System.out.printf("Renaming '%s' to '%s'%n", from, to);
+        Files.move(from, to);
+    }
+
+    private static String extractFileName(String url) {
+        return url.substring(url.lastIndexOf("/") + 1);
     }
 }
