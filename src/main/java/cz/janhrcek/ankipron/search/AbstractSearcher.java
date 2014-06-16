@@ -1,12 +1,14 @@
 package cz.janhrcek.ankipron.search;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import org.openqa.selenium.WebDriver;
 
-/**
- *
- * @author jhrcek
- */
 public abstract class AbstractSearcher implements Searcher {
 
     protected final WebDriver driver;
@@ -25,5 +27,48 @@ public abstract class AbstractSearcher implements Searcher {
     @Override
     public void close() {
         driver.close();
+    }
+
+    @Override
+    public Map<String, String> batchSearch(List<String> words) {
+        System.out.println(words.size() + " words to search");
+        Map<String, String> word2pronUrl = new HashMap<>();
+        List<String> wordsNotFound = new ArrayList<>();
+        List<String> pronNotAvailable = new ArrayList<>();
+        List<String> unknownErrors = new ArrayList<>();
+
+        for (String word : words) {
+            SearchResult sr = search(word);
+            switch (sr) {
+                case PRON_FOUND:
+                    word2pronUrl.put(word, getPronURL());
+                    break;
+                case WORD_NOT_FOUND:
+                    wordsNotFound.add(word);
+                    break;
+                case PRON_NOT_AVAILABLE:
+                    pronNotAvailable.add(word);
+                    break;
+                default:
+                    unknownErrors.add(word);
+            }
+        }
+        printReport(word2pronUrl.keySet(), wordsNotFound, pronNotAvailable, unknownErrors);
+        return word2pronUrl;
+    }
+
+    private void printReport(Set<String> wordsFound, List<String> wordsNotFound, List<String> pronNotAvailable,
+            List<String> unknownErrors) {
+        System.out.println("----- REPORT -----");
+        reportCollection("OK", wordsFound);
+        reportCollection("NOT FOUND", wordsNotFound);
+        reportCollection("PRON NOT AVAILABLE", pronNotAvailable);
+        reportCollection("UNKNOWN ERRORS", unknownErrors);
+    }
+
+    private void reportCollection(String collectionName, Collection<String> collection) {
+        if (!collection.isEmpty()) {
+            System.out.printf("%s : %d %s%n", collectionName, collection.size(), collection);
+        }
     }
 }

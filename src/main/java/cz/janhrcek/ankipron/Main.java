@@ -3,9 +3,11 @@ package cz.janhrcek.ankipron;
 import cz.janhrcek.ankipron.anki.AnkiDatabase;
 import cz.janhrcek.ankipron.anki.AnkiNote;
 import cz.janhrcek.ankipron.search.DWDS;
+import cz.janhrcek.ankipron.search.Searcher;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Main {
@@ -36,8 +38,12 @@ public class Main {
         logCollectionInfo(withoutDownloadablePron, "Words that don't have downloadable pron", false);
         logCollectionInfo(wordsWithoutPron, "Words remaining to be downloaded", true);
 
-        PronDownloader downloader = new PronDownloader(new DWDS(new FirefoxDriver()));
-        downloader.performDownload(wordsWithoutPron);
+        Searcher searcher = new DWDS(new FirefoxDriver());
+        Map<String, String> pronsToDownload = searcher.batchSearch(wordsWithoutPron);
+        searcher.close();
+
+        PronDownloader downloader = new PronDownloader();
+        downloader.performDownload(pronsToDownload);
     }
 
     public static void addMp3RefsToAnkiDb() throws ClassNotFoundException {
