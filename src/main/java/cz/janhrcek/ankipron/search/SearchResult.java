@@ -10,5 +10,4 @@ public enum SearchResult {
     PRON_NOT_AVAILABLE,
     WORD_NOT_FOUND,
     UNKNOWN
-
 }

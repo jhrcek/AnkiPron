@@ -9,7 +9,7 @@ import java.util.Map;
  *
  * @author jhrcek
  */
-public interface Searcher {
+public interface Searcher extends AutoCloseable {
 
     Map<String, String> batchSearch(List<String> words);
 
@@ -17,5 +17,6 @@ public interface Searcher {
 
     String getPronURL();
 
+    @Override //Override not to throw any exception
     void close();
 }

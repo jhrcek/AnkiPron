@@ -38,12 +38,11 @@ public class Main {
         logCollectionInfo(withoutDownloadablePron, "Words that don't have downloadable pron", false);
         logCollectionInfo(wordsWithoutPron, "Words remaining to be downloaded", true);
 
-        Searcher searcher = new DWDS(new FirefoxDriver());
-        Map<String, String> pronsToDownload = searcher.batchSearch(wordsWithoutPron);
-        searcher.close();
-
-        PronDownloader downloader = new PronDownloader();
-        downloader.performDownload(pronsToDownload);
+        try (Searcher searcher = new DWDS(new FirefoxDriver())) {
+            Map<String, String> pronsToDownload = searcher.batchSearch(wordsWithoutPron);
+            PronDownloader downloader = new PronDownloader();
+            downloader.performDownload(pronsToDownload);
+        }
     }
 
     public static void addMp3RefsToAnkiDb() throws ClassNotFoundException {

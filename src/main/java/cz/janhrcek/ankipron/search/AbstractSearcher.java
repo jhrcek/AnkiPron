@@ -26,7 +26,7 @@ public abstract class AbstractSearcher implements Searcher {
 
     @Override
     public void close() {
-        driver.close();
+        driver.quit();
     }
 
     @Override
