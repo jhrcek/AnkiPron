@@ -25,6 +25,7 @@ Baumarkt
 begeistert
 Behinderte
 beschädigt
+Betreiber
 bewölkt
 Blutabnahme
 Bluthochdruck
@@ -62,6 +63,7 @@ getrennt
 Gläubige
 größenteils
 Haushaltswaren
+Heimwerker
 herunterladen
 Holz-Jo-jo
 Hostel
@@ -75,6 +77,7 @@ Interregio
 irreführend
 Jeans
 Kaffe
+Kindesmissbrauch
 Klassenfahrt
 Klimawandel
 Klobürste
@@ -106,6 +109,7 @@ Pragmatiker
 Pressesprecher
 Primitivling
 Prominente
+Prävention
 Radiowerbung
 Reservierung
 schallend
@@ -119,6 +123,7 @@ Spielzeuggeschäft
 stechend
 Sterbehilfe
 stinkend
+Stolperstein
 Strafzettel
 Streitkraft
 sättigend
@@ -150,8 +155,10 @@ Verurteilte
 verängstigt
 viele
 virtuell
+voller
 Wandbemalung
 Waschbrettbauch
+Wesentliche
 wiederverwerten
 Windsurfer
 Wohnmobil

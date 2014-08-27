@@ -38,6 +38,7 @@ Augapfel
 ausdörren
 aushungern
 ausschließlich
+Aussichtsturm
 außer
 backen
 Balg
@@ -46,12 +47,15 @@ Balliste
 Bar
 Barmherzigkeit
 Bauer
+behände
 beidhändig
 Bernstein
 Bete
 Betriebssystem
 Betroffene
+Betttuch
 Bewusstsein
+beängstigen
 Biest
 Bildergeschichte
 bleifrei
@@ -65,6 +69,7 @@ Creme
 das
 deinetwegen
 Dekolleté
+Dinosaurier
 durchstehen
 Einfamilienhaus
 Einkaufszettel
@@ -86,7 +91,9 @@ es
 Esoterik
 euresgleichen
 Exempel
+Fachbereich
 Fall
+Fantasie
 farbenprächtig
 feige
 feindselig
@@ -95,6 +102,7 @@ Flüsschen
 fort
 Foto
 Fotomodell
+freihaben
 Fremde
 Frieden
 Frühjahr
@@ -177,6 +185,7 @@ Name
 Nebensatz
 Nichtraucherabteil
 Niederlande
+Nummernschild
 nützen
 Obdachlose
 Orthographie
@@ -195,6 +204,7 @@ Programmiersprache
 Promotion
 Prophezeiung
 prähistorisch
+Präzisierung
 Prügel
 Pup
 Pädophile
@@ -220,10 +230,13 @@ selbst
 selbstlos
 semantisch
 senkrecht
+silbrig
 Skala
+Sonnencreme
 sonst
 Spracherwerb
 Star
+Steppdecke
 Stock
 Straßenbahnschiene
 stressig
@@ -239,11 +252,13 @@ Top
 Tor
 totschlagen
 tottreten
+Uhrzeit
 umherziehen
 umliegend
 Umweltschützer
 Unendlichkeit
 unheilbar
+Uni
 Unkenntlichkeit
 unterdrücken
 unternehmen
@@ -265,6 +280,7 @@ vielversprechend
 vorbeibringen
 vorbeugen
 vorne
+waghalsig
 wahrscheinlich
 was
 weglocken
