@@ -6,8 +6,15 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class PronDownloader {
+
+    private final Path downloadDir;
+
+    public PronDownloader(Path downloadDir) {
+        this.downloadDir = Objects.requireNonNull(downloadDir);
+    }
 
     public void performDownload(Map<String, String> word2pronURL) {
         List<String> failedRenames = new ArrayList<>();
@@ -24,7 +31,7 @@ public class PronDownloader {
 
     private boolean downloadAndRenamePronFile(String word, String pronUrl) {
         ProcessBuilder pb = new ProcessBuilder("wget", pronUrl);
-        pb.directory(Project.getDownloadDir().toFile());
+        pb.directory(downloadDir.toFile());
 
         boolean dldAndRenameSuccessfull = false;
         try {
@@ -41,8 +48,8 @@ public class PronDownloader {
 
     private void rename(String word, String pronUrl) throws IOException {
         String fileName = extractFileName(pronUrl);
-        Path from = Project.getDownloadDir().resolve(fileName);
-        Path to = Project.getDownloadDir().resolve(word + ".mp3");
+        Path from = downloadDir.resolve(fileName);
+        Path to = downloadDir.resolve(word + ".mp3");
         System.out.printf("Renaming '%s' to '%s'%n", from, to);
         Files.move(from, to);
     }

@@ -40,7 +40,7 @@ public class Main {
 
         try (Searcher searcher = new DWDS(new FirefoxDriver())) {
             Map<String, String> pronsToDownload = searcher.batchSearch(wordsWithoutPron);
-            PronDownloader downloader = new PronDownloader();
+            PronDownloader downloader = new PronDownloader(Project.getDownloadDir());
             downloader.performDownload(pronsToDownload);
         }
     }
