@@ -31,7 +31,7 @@ public abstract class AbstractSearcher implements Searcher {
 
     @Override
     public Map<String, String> batchSearch(List<String> words) {
-        System.out.println(words.size() + " words to search");
+        System.out.printf("----- PHASE 1: Search -----%n%d words to search%n", words.size());
         Map<String, String> word2pronUrl = new HashMap<>();
         List<String> wordsNotFound = new ArrayList<>();
         List<String> pronNotAvailable = new ArrayList<>();
@@ -59,11 +59,11 @@ public abstract class AbstractSearcher implements Searcher {
 
     private void printReport(Set<String> wordsFound, List<String> wordsNotFound, List<String> pronNotAvailable,
             List<String> unknownErrors) {
-        System.out.println("----- REPORT -----");
-        reportCollection("OK", wordsFound);
-        reportCollection("NOT FOUND", wordsNotFound);
-        reportCollection("PRON NOT AVAILABLE", pronNotAvailable);
-        reportCollection("UNKNOWN ERRORS", unknownErrors);
+        System.out.println("SEARCH REPORT");
+        reportCollection("Found", wordsFound);
+        reportCollection("Not found", wordsNotFound);
+        reportCollection("Found, but pronunciation not available", pronNotAvailable);
+        reportCollection("Unknown errors", unknownErrors);
     }
 
     private void reportCollection(String collectionName, Collection<String> collection) {

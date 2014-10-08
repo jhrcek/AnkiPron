@@ -1,15 +1,15 @@
 package cz.janhrcek.ankipron;
 
+import com.google.common.base.Charsets;
 import cz.janhrcek.ankipron.search.DWDS;
 import cz.janhrcek.ankipron.search.Searcher;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class HappyClient {
@@ -41,14 +41,18 @@ public class HappyClient {
     }
 
     private static List<String> readWords(Path infile) {
-        List<String> words = new ArrayList<>();
-        try (Scanner in = new Scanner(infile)) {
-            while (in.hasNextLine()) {
-                words.add(in.nextLine().trim());
-            }
+        List<String> words = null;
+        try {
+            words = Files.readAllLines(infile, Charsets.UTF_8);
         } catch (IOException ioe) {
             System.err.printf("ERROR: can't read words from file %s: %s%n", infile, ioe.getMessage());
             System.exit(1);
+        }
+        //Remove empty lines
+        for (Iterator<String> it = words.iterator(); it.hasNext();) {
+            if (it.next().isEmpty()) {
+                it.remove();
+            }
         }
         return words;
     }
@@ -59,7 +63,7 @@ public class HappyClient {
             try {
                 Files.createDirectory(dir);
             } catch (IOException ex) {
-                System.err.println("ERROR: failed to create download dir");
+                System.err.printf("ERROR: failed to create download dir: %s%n", ex.getMessage());
             }
         }
         return dir;
