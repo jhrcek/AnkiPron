@@ -28,7 +28,7 @@ public class PronDownloader {
 
     private void downloadFiles() {
         ProcessBuilder pb = new ProcessBuilder("wget",
-                "--quiet", "--directory-prefix", "./downloads", "--input-file", URLS);
+                "--quiet", "--directory-prefix", downloadDir.toString(), "--input-file", URLS);
         pb.directory(new File("."));
         System.out.println("----- PHASE 3: Download mp3s -----");
         System.out.printf("Running '%s'%n", pb.command().toString().replaceAll("[\\[\\],]", ""));
