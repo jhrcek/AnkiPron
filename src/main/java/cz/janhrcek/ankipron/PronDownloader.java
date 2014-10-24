@@ -1,8 +1,8 @@
 package cz.janhrcek.ankipron;
 
-import com.google.common.base.Charsets;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -49,7 +49,7 @@ public class PronDownloader {
         System.out.printf("----- PHASE 2: write %d URLs to %s -----%n", words.size(), URLS);
         Path urlsFile = Paths.get(URLS);
         try {
-            Files.write(urlsFile, words, Charsets.UTF_8,
+            Files.write(urlsFile, words, Charset.forName("UTF-8"),
                     StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException ex) {
             System.err.printf("ERROR: Failed writing URLs to file %s:%s%n", urlsFile, ex.getMessage());
