@@ -63,7 +63,7 @@ public class DWDS extends AbstractSearcher {
     }
 
     private void waitForPageLoad() {
-        new WebDriverWait(driver, 5, 100).until(
+        new WebDriverWait(driver, 15, 100).until(
                 ExpectedConditions.not(ExpectedConditions.presenceOfAllElementsLocatedBy(PANEL_LOADING)));
     }
 
