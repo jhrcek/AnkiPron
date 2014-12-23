@@ -129,6 +129,7 @@ gewährleisten
 Glas
 grauen
 gut
+Gültigkeitsdauer
 Handvoll
 Hausarzt
 heim
@@ -152,13 +153,17 @@ Irre
 Jagdflugzeug
 jedoch
 jetzig
+Jogginghose
 Juli
 Kampfkunst
+kaputtschlagen
 Kassierer
+Kater
 Klimaschutz
 Knopfdruck
 Kohlekraftwerk
 Kolonisator
+Kommandozeile
 komplex
 Konzentrationslager
 Kopfschmerz
@@ -186,9 +191,11 @@ Modenschau
 Mundwinkel
 märchenhaft
 Müller
+Müllkippe
 nahe
 Name
 Nebensatz
+Nebensächlichkeit
 Nichtraucherabteil
 Niederlande
 Nummernschild
@@ -222,6 +229,7 @@ Residenz
 ringsum
 Rohkost
 Ruhestatt
+Rückmeldung
 S-Bahn
 Schicht
 Schiffbau
@@ -278,9 +286,11 @@ vergaffen
 vergebens
 vergiften
 vermarkten
+Versandhaus
 versperren
 verspotten
 verstört
+vgl.
 vielleicht
 vielversprechend
 vorbeibringen
