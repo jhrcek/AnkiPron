@@ -17,6 +17,8 @@ public class AnkiDatabase {
     //Select all visible fields of notes, that contain flag wort, but don't have mp3 file associated with them
     private static final String WORDS_WITHOUT_PRON_QUERY
             = "select id,tags,flds,sfld from notes where tags like '%wort%' and flds not like '%.mp3%';";
+    private static final String ALL_WORDS = "select id,tags,flds,sfld from notes where tags like '%wort%';";
+
     private static final String WORD_UPDATE_QUERY = "update notes set flds=? where id=?";
 
     public AnkiDatabase() throws ClassNotFoundException {
@@ -24,10 +26,18 @@ public class AnkiDatabase {
     }
 
     public List<AnkiNote> getNotesWithoutPron() {
+        return executeWordQuery(WORDS_WITHOUT_PRON_QUERY);
+    }
+
+    public List<AnkiNote> getAllWords() {
+        return executeWordQuery(ALL_WORDS);
+    }
+
+    private List<AnkiNote> executeWordQuery(String query) {
         List<AnkiNote> notesWithoutPron = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + Project.getAnkiDb());
                 Statement statement = conn.createStatement();
-                ResultSet rs = statement.executeQuery(WORDS_WITHOUT_PRON_QUERY)) {
+                ResultSet rs = statement.executeQuery(query)) {
             while (rs.next()) {
                 long wordId = rs.getLong("id");
                 String flds = rs.getString("flds");
