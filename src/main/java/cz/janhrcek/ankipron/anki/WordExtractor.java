@@ -14,6 +14,7 @@ public class WordExtractor {
     //Word of the form "e Frau" -> only "Frau" will be sought for
     private static final Pattern SUBST_WITH_ARTICLE = Pattern.compile("^\\(?[res]\\)?(/e)? ([^\\s]*)");
     private static final String THING_IN_PARENS = "\\([^\\)]*\\)"; //Aything surrounded by ()
+    private static final String PRON_REFERENCE = "\\[sound:.*\\.mp3\\]"; //Reference to pron mp3 file
     private static final String PART_AFTER_DASH = " - .*";
 
     /**
@@ -47,6 +48,9 @@ public class WordExtractor {
      * @return the word we can search in the dictionary
      */
     private String extractFromDeutschField(String deutsch) {
+        // Remove already existing pron references
+        deutsch = deutsch.replaceAll(PRON_REFERENCE, "").trim();
+
         //When deutsch contains more things separated by space
         if (deutsch.split(" ").length != 1) {
             //Remove all things in parenthesis
