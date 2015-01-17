@@ -25,7 +25,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>cz.janhrcek.ankipron.HappyClient</mainClass>
+              <mainClass>cz.janhrcek.ankipron.Main</mainClass>
             </manifest>
           </archive>
           <descriptorRefs> <!-- build with: mvn clean compile assembly:single-->

@@ -3,25 +3,50 @@ package cz.janhrcek.ankipron;
 import cz.janhrcek.ankipron.anki.AnkiDatabase;
 import cz.janhrcek.ankipron.anki.AnkiNote;
 import cz.janhrcek.ankipron.search.DWDS;
+import cz.janhrcek.ankipron.search.Duden;
 import cz.janhrcek.ankipron.search.Searcher;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        //Use case 1: for words without pron, download the prons
-        verifyAnkiNotesIntegrity();
-        //downloadMp3sForWords();
+        if (args.length == 0) {
+            printUsageAndExit();
+        }
 
-        //Use case 2: having pron mp3s downloaded, add references to them to anki db
-        //addMp3RefsToAnkiDb();
+        switch (args[0]) {
+            case "verify": //Use case 1: Verify that word data in anki database have proper format
+                verifyAnkiNotesIntegrity();
+                break;
+            case "download": //Use case 2: download pronunciation mp3s for words from anki DB
+                try (Searcher searcher = createSearcher(args)) {
+                    downloadMp3sForWords(searcher);
+                }
+                break;
+            case "add": //Use case 3: having pron mp3s downloaded, add references to them to anki DB
+                addMp3RefsToAnkiDb();
+                break;
+            default:
+                printUsageAndExit();
+        }
     }
 
-    public static void downloadMp3sForWords() throws IOException, ClassNotFoundException {
+    /* Instantiate searcher based on cmd line args. */
+    private static Searcher createSearcher(String[] args) {
+        WebDriver wd = new FirefoxDriver();
+        if (args.length > 1 && "duden".equals(args[1])) {//Use DWDS by default, Duden only on explicit request
+            return new Duden(wd);
+        } else {
+            return new DWDS(wd);
+        }
+    }
+
+    public static void downloadMp3sForWords(Searcher searcher) throws IOException, ClassNotFoundException {
         List<String> alreadyDownloaded = Project.getWordsDownloaded();
         List<String> notInDictionary = Project.getWordsNotFound();
         List<String> withoutDownloadablePron = Project.getWordsForWhichPronNotAvailable();
@@ -38,11 +63,9 @@ public class Main {
         logCollectionInfo(withoutDownloadablePron, "Words that don't have downloadable pron", false);
         logCollectionInfo(wordsWithoutPron, "Words remaining to be downloaded", true);
 
-        try (Searcher searcher = new DWDS(new FirefoxDriver())) {
-            Map<String, String> pronsToDownload = searcher.batchSearch(wordsWithoutPron);
-            PronDownloader downloader = new PronDownloader(Project.getDownloadDir());
-            downloader.performDownload(pronsToDownload);
-        }
+        Map<String, String> pronsToDownload = searcher.batchSearch(wordsWithoutPron);
+        PronDownloader downloader = new PronDownloader(Project.getDownloadDir());
+        downloader.performDownload(pronsToDownload);
     }
 
     public static void addMp3RefsToAnkiDb() throws ClassNotFoundException {
@@ -103,5 +126,10 @@ public class Main {
         if (alsoLogContents) {
             System.out.println(c);
         }
+    }
+
+    private static void printUsageAndExit() {
+        System.err.println("Usage: java -jar AnkiPron.jar [verify|download[dwds|duden]|addprons]");
+        System.exit(1);
     }
 }

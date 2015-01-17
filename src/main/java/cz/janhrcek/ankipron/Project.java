@@ -1,14 +1,19 @@
 package cz.janhrcek.ankipron;
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Project {
 
@@ -57,8 +62,16 @@ public class Project {
 
     private static List<String> readLines(String resource) {
         try {
-            Path resPath = Paths.get(Project.class.getResource(resource).toURI());
-            return Files.readAllLines(resPath, StandardCharsets.UTF_8);
+            /* http://stackoverflow.com/questions/25032716/getting-filesystemnotfoundexception-from-zipfilesystemprovider-when-creating-a-p
+             Have to create ZipFilesystem in order to be able to read from resource files packaged in executable jar file.
+             */
+            URI resourceUri = Project.class.getResource(resource).toURI();
+            Map<String, String> env = new HashMap<>();
+            env.put("create", "true");
+            try (FileSystem fs = FileSystems.newFileSystem(resourceUri, env)) {
+                Path resPath = Paths.get(resourceUri);
+                return Files.readAllLines(resPath, StandardCharsets.UTF_8);
+            }
         } catch (IOException | URISyntaxException ex) {
             throw new IllegalStateException("Failed to read resource " + resource);
         }
