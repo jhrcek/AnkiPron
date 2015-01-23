@@ -129,7 +129,7 @@ public class Main {
     }
 
     private static void printUsageAndExit() {
-        System.err.println("Usage: java -jar AnkiPron.jar [verify|download[dwds|duden]|addprons]");
+        System.err.println("Usage: java -jar AnkiPron.jar [verify|download[dwds|duden]|add]");
         System.exit(1);
     }
 }
