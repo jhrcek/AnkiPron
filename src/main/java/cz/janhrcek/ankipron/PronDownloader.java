@@ -21,9 +21,13 @@ public class PronDownloader {
     }
 
     public void performDownload(Map<String, String> word2pronURL) {
-        writeWordsToFile(word2pronURL.values());
-        downloadFiles();
-        renameDownloadedFiles(word2pronURL);
+        if (!word2pronURL.isEmpty()) {
+            writeWordsToFile(word2pronURL.values());
+            downloadFiles();
+            renameDownloadedFiles(word2pronURL);
+        } else {
+            System.out.println("Nothing to download");
+        }
     }
 
     private void downloadFiles() {
