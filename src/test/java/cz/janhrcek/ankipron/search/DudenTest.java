@@ -22,7 +22,7 @@ public class DudenTest {
 
     @Test
     public void wordNotFound() {
-        assertResutlAndPronURL("nonexistent", SearchResult.WORD_NOT_FOUND, null);
+        assertResutlAndPronURL("nonExistentNonSense", SearchResult.WORD_NOT_FOUND, null);
         assertResutlAndPronURL("otherNonexistent", SearchResult.WORD_NOT_FOUND, null);
     }
 

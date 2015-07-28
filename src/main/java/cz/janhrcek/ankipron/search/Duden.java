@@ -14,9 +14,9 @@ import org.openqa.selenium.WebElement;
  */
 public class Duden extends AbstractSearcher {
 
-    private static final String RESTSCHREIBUNG_URL = "http://www.duden.de/rechtschreibung/";
+    private static final String SEARCH_URL = "http://www.duden.de/suchen/dudenonline/";
+    private static final By FIRST_HIT = By.cssSelector(".search-result.first > h3 > a");
     private static final By PRONOUNCIATION = By.cssSelector("#mp3_mini_1 a[title^='Als mp3']");
-    private static final By WORD_FOUND = By.cssSelector(".lemma");
 
     public Duden(WebDriver driver) {
         super(driver);
@@ -27,10 +27,11 @@ public class Duden extends AbstractSearcher {
         Objects.requireNonNull(word, "aWord must not be null!");
         pronUrl = null;
         System.out.print("Searching word " + ++counter + ": '" + word + "' - ");
-        driver.get(RESTSCHREIBUNG_URL + normalizeSearchWord(word));
+        driver.get(SEARCH_URL + normalizeSearchWord(word));
 
         try {
-            driver.findElement(WORD_FOUND);
+            WebElement firstHitLink = driver.findElement(FIRST_HIT);
+            firstHitLink.click();
             try {
                 pronUrl = driver.findElement(PRONOUNCIATION).getAttribute("href");
                 System.out.println("Pron URL: " + pronUrl);
@@ -40,13 +41,9 @@ public class Duden extends AbstractSearcher {
                 return SearchResult.PRON_NOT_AVAILABLE;
             }
         } catch (NoSuchElementException nse) {
-            List<WebElement> notFoundElems = driver.findElements(By.cssSelector(".error404 > strong"));
-            if (!notFoundElems.isEmpty()) {
-                System.out.println(notFoundElems.get(0).getText());
-                return SearchResult.WORD_NOT_FOUND;
-            }
+            System.out.println("Word not found");
+            return SearchResult.WORD_NOT_FOUND;
         }
-        return SearchResult.UNKNOWN;
     }
 
     private String normalizeSearchWord(String word) {
