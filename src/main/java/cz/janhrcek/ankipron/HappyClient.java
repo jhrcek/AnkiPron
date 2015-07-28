@@ -1,8 +1,8 @@
 package cz.janhrcek.ankipron;
 
 import com.google.common.base.Charsets;
-import cz.janhrcek.ankipron.search.DWDS;
 import cz.janhrcek.ankipron.search.Searcher;
+import cz.janhrcek.ankipron.search.SearcherFactory;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,7 +10,6 @@ import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class HappyClient {
 
@@ -19,7 +18,7 @@ public class HappyClient {
         List<String> words = readWords(infile);
         Path downloadDir = getDownloadDir();
 
-        try (Searcher searcher = new DWDS(new FirefoxDriver())) {
+        try (Searcher searcher = SearcherFactory.newDwds()) {
             Map<String, String> searchResult = searcher.batchSearch(words);
 
             PronDownloader downloader = new PronDownloader(downloadDir);

@@ -1,6 +1,5 @@
 package cz.janhrcek.ankipron.search;
 
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
@@ -15,7 +14,7 @@ import static org.testng.Assert.assertTrue;
  */
 public class DWDSTest {
 
-    private final Searcher dwds = new DWDS(new FirefoxDriver());
+    private final Searcher dwds = SearcherFactory.newDwds();
 
     @Test
     public void wordWithoutPron() {

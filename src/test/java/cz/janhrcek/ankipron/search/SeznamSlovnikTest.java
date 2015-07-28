@@ -2,7 +2,6 @@ package cz.janhrcek.ankipron.search;
 
 import static org.testng.Assert.assertEquals;
 
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
@@ -12,7 +11,7 @@ import org.testng.annotations.Test;
  */
 public class SeznamSlovnikTest {
 
-    private final Searcher seznam = new SeznamSlovnik(new FirefoxDriver());
+    private final Searcher seznam = SearcherFactory.newSeznam();
 
     @Test
     public void wordWithoutPron() {

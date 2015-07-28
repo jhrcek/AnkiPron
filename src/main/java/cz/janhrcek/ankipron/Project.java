@@ -56,7 +56,7 @@ public class Project {
         DirectoryStream<Path> mp3FilesInDownloadDir = Files.newDirectoryStream(DOWNLOAD_DIR, "*.mp3");
         for (Path mp3 : mp3FilesInDownloadDir) {
             String filename = mp3.getFileName().toString();
-            wordsDownloaded.add(filename.substring(0, filename.indexOf(".")));
+            wordsDownloaded.add(filename.substring(0, filename.indexOf('.')));
         }
         return wordsDownloaded;
     }

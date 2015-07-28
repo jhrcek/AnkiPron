@@ -2,15 +2,12 @@ package cz.janhrcek.ankipron;
 
 import cz.janhrcek.ankipron.anki.AnkiDatabase;
 import cz.janhrcek.ankipron.anki.AnkiNote;
-import cz.janhrcek.ankipron.search.DWDS;
-import cz.janhrcek.ankipron.search.Duden;
 import cz.janhrcek.ankipron.search.Searcher;
+import cz.janhrcek.ankipron.search.SearcherFactory;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Main {
 
@@ -38,11 +35,10 @@ public class Main {
 
     /* Instantiate searcher based on cmd line args. */
     private static Searcher createSearcher(String[] args) {
-        WebDriver wd = new FirefoxDriver();
         if (args.length > 1 && "duden".equals(args[1])) {//Use DWDS by default, Duden only on explicit request
-            return new Duden(wd);
+            return SearcherFactory.newDuden();
         } else {
-            return new DWDS(wd);
+            return SearcherFactory.newDwds();
         }
     }
 

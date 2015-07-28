@@ -1,6 +1,5 @@
 package cz.janhrcek.ankipron.search;
 
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
@@ -12,7 +11,7 @@ import static org.testng.Assert.assertEquals;
  */
 public class DudenTest {
 
-    private final Searcher duden = new Duden(new FirefoxDriver());
+    private final Searcher duden = SearcherFactory.newDuden();
 
     @Test
     public void wordWithoutPron() {
