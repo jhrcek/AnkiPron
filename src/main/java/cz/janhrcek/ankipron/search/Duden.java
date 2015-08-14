@@ -14,8 +14,8 @@ import org.openqa.selenium.WebElement;
 public class Duden extends AbstractSearcher {
 
     private static final String SEARCH_URL = "http://www.duden.de/suchen/dudenonline/";
-    private static final By FIRST_HIT = By.cssSelector(".search-result.first > h3 > a");
-    private static final By PRONOUNCIATION = By.cssSelector("#mp3_mini_1 a[title^='Als mp3']");
+    private static final By FIRST_HIT = By.cssSelector("#block-duden-tiles-0 h2 > a");
+    private static final By PRONOUNCIATION = By.cssSelector("a.audio[title^='Als mp3']");
 
     public Duden(WebDriver driver) {
         super(driver);
