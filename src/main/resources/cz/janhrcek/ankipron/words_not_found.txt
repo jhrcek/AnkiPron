@@ -63,6 +63,7 @@ erigieren
 Ermittler
 Estland
 Fallunterscheidung
+falschliegen
 faszinierend
 Fehlermeldung
 Fernsehwerbung
@@ -86,6 +87,7 @@ größenteils
 größergleich
 gummiert
 Haushaltswaren
+Hausratversicherung
 Heimatverzeichnis
 Heimwerker
 herumschnüffeln
@@ -120,6 +122,7 @@ Kreuzprodukt
 Kroatien
 Langstrecke
 Laufzeitumgebung
+Leerzeichen
 Lehrwerk
 Leistungsdruck
 letztendlich
@@ -163,6 +166,7 @@ Schlafengehen
 Schnittmenge
 Schraubendreher
 Seidenhose
+Seitenstreifen
 selbstständig
 skifahren
 Sperrbezirk
