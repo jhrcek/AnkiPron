@@ -4,6 +4,7 @@ import java.util.Objects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  *
@@ -27,7 +28,9 @@ public class SeznamSlovnik extends AbstractSearcher {
     @Override
     public SearchResult search(String word) {
         Objects.requireNonNull(word, "aWord must not be null!");
-        driver.findElement(SEARCH_INPUT).sendKeys(word);
+        WebElement searchInput = driver.findElement(SEARCH_INPUT);
+        searchInput.clear();
+        searchInput.sendKeys(word);
         driver.findElement(SEARCH_BUTTON).click();
 
         System.out.print("Searching word " + ++counter + ": '" + word + "' - ");

@@ -1,9 +1,8 @@
 package cz.janhrcek.ankipron.search;
 
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.Test;
-
-import static org.testng.Assert.assertEquals;
+import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 /**
  *
@@ -11,7 +10,7 @@ import static org.testng.Assert.assertEquals;
  */
 public class DudenTest {
 
-    private final Searcher duden = SearcherFactory.newDuden();
+    private static final Searcher DUDEN = SearcherFactory.newDuden();
 
     @Test
     public void wordWithoutPron() {
@@ -36,14 +35,14 @@ public class DudenTest {
     }
 
     private void assertResutlAndPronURL(String word, SearchResult searchResult, String pronUrl) {
-        assertEquals(duden.search(word), searchResult);
-        assertEquals(duden.getPronURL(), pronUrl);
+        assertEquals(searchResult, DUDEN.search(word));
+        assertEquals(pronUrl, DUDEN.getPronURL());
     }
 
     @AfterClass
-    public void closeDwds() {
-        if (duden != null) {
-            duden.close();
+    public static void closeDwds() {
+        if (DUDEN != null) {
+            DUDEN.close();
         }
     }
 }

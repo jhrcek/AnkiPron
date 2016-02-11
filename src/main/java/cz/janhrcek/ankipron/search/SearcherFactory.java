@@ -23,7 +23,7 @@ public class SearcherFactory {
     }
 
     public static Searcher newSeznam() {
-        return new SeznamSlovnik(createWebDriver(false));
+        return new SeznamSlovnik(createWebDriver(true));
     }
 
     private static WebDriver createWebDriver(boolean withAdBlock) {

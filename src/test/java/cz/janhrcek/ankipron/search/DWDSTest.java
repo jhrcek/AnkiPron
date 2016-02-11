@@ -1,12 +1,11 @@
 package cz.janhrcek.ankipron.search;
 
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.Test;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
-import static org.testng.Assert.assertTrue;
+import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 /**
  *
@@ -14,7 +13,7 @@ import static org.testng.Assert.assertTrue;
  */
 public class DWDSTest {
 
-    private final Searcher dwds = SearcherFactory.newDwds();
+    private static final Searcher DWDS = SearcherFactory.newDwds();
 
     @Test
     public void wordWithoutPron() {
@@ -53,8 +52,8 @@ public class DWDSTest {
     }
 
     private void assertResutlAndPronURL(String word, SearchResult searchResult, boolean urlExpected) {
-        assertEquals(dwds.search(word), searchResult);
-        String url = dwds.getPronURL();
+        assertEquals(DWDS.search(word), searchResult);
+        String url = DWDS.getPronURL();
         if (urlExpected) {
             assertNotNull(url);
             assertTrue(url.startsWith("http://media.dwds.de/dwds2/"));
@@ -65,9 +64,9 @@ public class DWDSTest {
     }
 
     @AfterClass
-    public void closeDwds() {
-        if (dwds != null) {
-            dwds.close();
+    public static void closeDwds() {
+        if (DWDS != null) {
+            DWDS.close();
         }
     }
 }

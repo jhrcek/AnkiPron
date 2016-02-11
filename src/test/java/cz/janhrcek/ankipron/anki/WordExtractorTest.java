@@ -1,25 +1,35 @@
 package cz.janhrcek.ankipron.anki;
 
-import static org.testng.Assert.assertEquals;
-
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import java.util.Arrays;
+import java.util.Collection;
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
+import org.junit.runners.Parameterized.Parameters;
 
 /**
  *
  * @author jhrcek
  */
+@RunWith(Parameterized.class)
 public class WordExtractorTest {
 
-    @Test(dataProvider = "words")
-    public void extractWord(String flds, String expectedWord) {
+    @Parameter(value = 0)
+    public String flds;
+    @Parameter(value = 1)
+    public String expectedWord;
+
+    @Test
+    public void extractWord() {
         WordExtractor we = new WordExtractor();
-        assertEquals(we.extractWord(flds), expectedWord);
+        assertEquals(expectedWord, we.extractWord(flds));
     }
 
-    @DataProvider
-    Object[][] words() {
-        return new Object[][]{
+    @Parameters
+    public static Collection<Object[]> words() {
+        return Arrays.asList(new Object[][]{
             {"pralinkae Praline (-, -n)y", "Praline"},
             {"vydání (knihy ap.)e Auflage (-, -n)y", "Auflage"},
             {"zálusk, choutky (na co)s Gelüste (auf 4.p)y", "Gelüste"},
@@ -32,6 +42,6 @@ public class WordExtractorTest {
             {"napadnou (někoho) (o myšlence)<br />(min?)<br />(er?)ein/fallen (j-m) (3.p!) - fiel ein - ist eingefallen<br />fällt einDann <b>fiel</b> ihnen Frederick <b>ein</b>.<br>Es ist uns leider nichts <b>eingefallen</b>.y",
                 "einfallen"},
             {"prosit (někoho o něco)<br />(min?)bitten (j-n um etw) - bat - hat gebeteny", "bitten"}
-        };
+        });
     }
 }
