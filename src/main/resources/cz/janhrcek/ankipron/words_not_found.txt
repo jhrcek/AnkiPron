@@ -6,6 +6,7 @@ abgelehnt
 abwertend
 Adlige
 Adverbialbestimmung
+Alleinerziehende
 anklicken
 ansteckend
 Antwortbogen
@@ -19,6 +20,8 @@ Aufenthaltszimmer
 auffallend
 aufgrund
 aufpeppen
+Aufständische
+ausgemergelt
 ausschildern
 ausverkauft
 Ausweispapiere
@@ -42,6 +45,7 @@ Buchhalterin
 CD
 CD-Player
 Datentyp
+Degustation
 Dezimalschreibweise
 Dienstleister
 domestizieren
@@ -52,8 +56,10 @@ E-Mail
 Effizienz
 Eigengewichtübung
 Einbindung
+Einheimische
 Einkaufsmöglichkeiten
 Einkaufswagen
+Einrad
 eintippen
 Einzimmerwohnung
 Englischlehrerin
@@ -73,6 +79,7 @@ Fitnesscenter
 Fließkommazahl
 Flugticket
 Folterer
+Früchtetee
 Fußgängerampel
 ganzzahlig
 gebraucht
@@ -120,6 +127,7 @@ Kranke
 Kreativität
 Kreuzprodukt
 Kroatien
+kuschelig
 Langstrecke
 Laufzeitumgebung
 Leerzeichen
@@ -137,6 +145,7 @@ Muttersprachler
 Mähren
 Mängelhaftung
 Mülltrennung
+Müsliriegel
 nachfolgend
 Nachkommastellen
 Nebeneffekt
@@ -170,6 +179,7 @@ Seitenstreifen
 selbstständig
 skifahren
 Sperrbezirk
+Sperrmüll
 Spielsache
 Spielzeuggeschäft
 stechend
@@ -204,6 +214,7 @@ verheiratet
 Vermögensrecht
 vernetzen
 Verrückte
+verschwommen
 versprengt
 Verurteilte
 verängstigt
@@ -213,6 +224,7 @@ virtuell
 voller
 vorausblickend
 vorletzte
+Vorreiter
 Wahrheitswert
 Wandbemalung
 Waschbrettbauch
@@ -221,12 +233,14 @@ Wesentliche
 wiederholbar
 wiederverwerten
 Windsurfer
+wohlwollend
 Wohnmobil
 Zehnerpotenz
 Zielflughafen
 zufälligerweise
 Zustellbett
 Zweierpotenz
+Ölteppich
 Überlappung
 überraschend
 überrascht

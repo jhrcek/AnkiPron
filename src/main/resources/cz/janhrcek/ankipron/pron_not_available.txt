@@ -33,6 +33,8 @@ attraktiv
 Aufbettung
 aufblähen
 Aufforderungssatz
+Aufgabenbereich
+aufständisch
 aufwiegen
 aufwändig
 Augapfel
@@ -143,6 +145,7 @@ grauen
 großenteils
 gut
 Gültigkeitsdauer
+handlungsfähig
 Handvoll
 Hausarzt
 heim
@@ -194,6 +197,7 @@ leidenschaftlich
 Lerner
 Lichtjahr
 Lob
+Löwenanteil
 Majonäse
 mancherlei
 Maskottchen
@@ -332,6 +336,7 @@ vgl.
 vielerorts
 vielleicht
 vielversprechend
+vorankommen
 vorbehalten
 vorbeibringen
 vorbeugen
@@ -350,6 +355,7 @@ wiedergutmachen
 Wiederverwertung
 Windschutzscheibe
 Wirkstoff
+Wohlergehen
 wolkenlos
 Zauberer
 Zehe
