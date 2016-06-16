@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -13,7 +14,7 @@ import org.junit.Test;
  */
 public class DWDSTest {
 
-    private static final Searcher DWDS = SearcherFactory.newDwds();
+    private static Searcher dwds;
 
     @Test
     public void wordWithoutPron() {
@@ -52,8 +53,8 @@ public class DWDSTest {
     }
 
     private void assertResutlAndPronURL(String word, SearchResult searchResult, boolean urlExpected) {
-        assertEquals(DWDS.search(word), searchResult);
-        String url = DWDS.getPronURL();
+        assertEquals(dwds.search(word), searchResult);
+        String url = dwds.getPronURL();
         if (urlExpected) {
             assertNotNull(url);
             assertTrue(url.startsWith("http://media.dwds.de/dwds2/"));
@@ -63,10 +64,15 @@ public class DWDSTest {
         }
     }
 
+    @BeforeClass
+    public static void initDwds() {
+        dwds = SearcherFactory.newDwds();
+    }
+
     @AfterClass
     public static void closeDwds() {
-        if (DWDS != null) {
-            DWDS.close();
+        if (dwds != null) {
+            dwds.close();
         }
     }
 }

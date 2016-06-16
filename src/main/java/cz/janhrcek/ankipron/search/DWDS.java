@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -82,7 +83,15 @@ public class DWDS extends AbstractSearcher {
         List<WebElement> closeImages;
         do {
             closeImages = driver.findElements(PANEL_CLOSER);
-            closeImages.get(1).click();
+            try {
+                closeImages.get(1).click();
+            } catch (WebDriverException otherElementWouldReceiveClick) {
+                System.out.println("Ignoring exception on closing unwanted panel");
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ignore2) {
+                }
+            }
         } while (closeImages.size() > 2);
     }
 }

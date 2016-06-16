@@ -51,7 +51,7 @@
   <dependencies>
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-firefox-driver</artifactId>
+      <artifactId>selenium-chrome-driver</artifactId>
       <version>${selenium.version}</version>
     </dependency>
     <dependency>
