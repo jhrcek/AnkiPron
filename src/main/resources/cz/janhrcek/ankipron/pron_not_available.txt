@@ -53,6 +53,7 @@ Balliste
 Bar
 Barmherzigkeit
 Bauer
+befehligen
 behände
 beidhändig
 Bernstein
@@ -188,6 +189,7 @@ Kopflehne
 Kopfschmerz
 kriminalisieren
 Kultusminister
+Kutscher
 Köstlichkeit
 Lateinamerika
 Lebensart
@@ -229,6 +231,7 @@ nützen
 Obdachlose
 Orthographie
 Pappbecher
+perfid
 Pflaume
 Phiole
 Pilger
@@ -240,6 +243,7 @@ Pommes
 Positiv
 Praline
 preisgünstig
+Privatsphäre
 Programmiersprache
 Promotion
 Prophezeiung
@@ -256,6 +260,7 @@ Rechtschreibfehler
 Reis
 Reisekatalog
 Residenz
+Ribisel
 ringsum
 Rohkost
 Ruhestatt
@@ -297,6 +302,7 @@ Suchmaschine
 Syntax
 tafelfertig
 Tagundnachtgleiche
+tatenlos
 Teilchen
 Teleskop
 Tennisprofi
@@ -362,6 +368,7 @@ Zehe
 zerlumpt
 zerstreiten
 ziemlich
+zig
 Zivildienst
 zusätzlich
 zuteilwerden

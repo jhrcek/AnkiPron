@@ -13,6 +13,7 @@ Antwortbogen
 Anwender
 Anzünder
 Arme
+Armenierin
 Artefakt
 Aspirin
 Attraktivität
@@ -33,6 +34,7 @@ begeistert
 Behinderte
 Beipackzettel
 Berechenbarkeit
+Berufsarmee
 beschädigt
 Betreiber
 bewölkt
@@ -120,6 +122,7 @@ Klassenfahrt
 Klaustrophobie
 Klimawandel
 Klobürste
+Kollateralschaden
 Komode
 konkatenieren
 Kontrazeption
@@ -149,6 +152,7 @@ Müsliriegel
 nachfolgend
 Nachkommastellen
 Nebeneffekt
+niderschlagen
 nächst-
 Näherung
 Ochs
@@ -174,9 +178,11 @@ Schiefe
 Schlafengehen
 Schnittmenge
 Schraubendreher
+Schwarze
 Seidenhose
 Seitenstreifen
 selbstständig
+Serbin
 skifahren
 Sperrbezirk
 Sperrmüll
@@ -220,6 +226,7 @@ Verurteilte
 verängstigt
 viele
 Vielfache
+Vielvölkerstaat
 virtuell
 voller
 vorausblickend
