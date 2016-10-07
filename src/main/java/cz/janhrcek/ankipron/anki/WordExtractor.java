@@ -4,7 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *
  * @author jhrcek
  */
 public class WordExtractor {
@@ -19,8 +18,7 @@ public class WordExtractor {
 
     /**
      * @param fldsAttribute 'flds' attribute from Anki's 'notes' table, representing 4-tuple: "Czech deutsch note
-     * reverse", where each of the 4 fields is separated by FIELD_SEPARATOR
-     *
+     *                      reverse", where each of the 4 fields is separated by FIELD_SEPARATOR
      * @return German word extracted from the deutsch part, that can be searched in the dictionary and whose
      * pronunciation we want to search
      */

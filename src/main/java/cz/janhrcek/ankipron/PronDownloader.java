@@ -37,7 +37,6 @@ public class PronDownloader {
         System.out.println("----- PHASE 3: Download mp3s -----");
         System.out.printf("Running '%s'%n", pb.command().toString().replaceAll("[\\[\\],]", ""));
         try {
-
             Process wget = pb.start();
             wget.waitFor();
             int wgetExitValue = wget.exitValue();

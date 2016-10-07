@@ -1,6 +1,7 @@
 package cz.janhrcek.ankipron.anki;
 
 import cz.janhrcek.ankipron.Project;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.Connection;
@@ -36,8 +37,8 @@ public class AnkiDatabase {
     private List<AnkiNote> executeWordQuery(String query) {
         List<AnkiNote> notesWithoutPron = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + Project.getAnkiDb());
-                Statement statement = conn.createStatement();
-                ResultSet rs = statement.executeQuery(query)) {
+             Statement statement = conn.createStatement();
+             ResultSet rs = statement.executeQuery(query)) {
             while (rs.next()) {
                 long wordId = rs.getLong("id");
                 String flds = rs.getString("flds");
@@ -71,7 +72,7 @@ public class AnkiDatabase {
         int expectedUpdates = 0;
         int realUpdates = 0;
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + Project.getAnkiDb());
-                PreparedStatement wordUpdate = conn.prepareStatement(WORD_UPDATE_QUERY)) {
+             PreparedStatement wordUpdate = conn.prepareStatement(WORD_UPDATE_QUERY)) {
             conn.setAutoCommit(false);
             for (AnkiNote note : downloadedProns) {
                 if (Files.exists(getMp3File(note.getWord()))) {

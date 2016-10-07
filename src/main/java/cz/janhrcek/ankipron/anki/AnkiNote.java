@@ -3,7 +3,6 @@ package cz.janhrcek.ankipron.anki;
 import static cz.janhrcek.ankipron.anki.WordExtractor.FIELD_SEPARATOR;
 
 /**
- *
  * @author jhrcek
  */
 public class AnkiNote {

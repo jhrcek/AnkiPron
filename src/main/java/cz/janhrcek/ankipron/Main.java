@@ -4,6 +4,7 @@ import cz.janhrcek.ankipron.anki.AnkiDatabase;
 import cz.janhrcek.ankipron.anki.AnkiNote;
 import cz.janhrcek.ankipron.search.Searcher;
 import cz.janhrcek.ankipron.search.SearcherFactory;
+
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;

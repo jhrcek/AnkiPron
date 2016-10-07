@@ -17,8 +17,7 @@ import java.util.Map;
 
 public class Project {
 
-    private static final Path ROOT_DIR = Paths.get(System.getProperty("user.home"))
-            .resolve("Temp/AnkiDeutschPron");
+    private static final Path ROOT_DIR = Paths.get(System.getProperty("user.dir"));
     private static final Path DOWNLOAD_DIR = ROOT_DIR.resolve("Downloaded");
     private static final Path ANKI_DB = ROOT_DIR.resolve("collection.anki2");
 
