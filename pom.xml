@@ -51,12 +51,12 @@
   <dependencies>
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-chrome-driver</artifactId>
+      <artifactId>selenium-api</artifactId>
       <version>${selenium.version}</version>
     </dependency>
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-support</artifactId>
+      <artifactId>selenium-chrome-driver</artifactId>
       <version>${selenium.version}</version>
     </dependency>
     <dependency> <!-- SQLite jdbc driver -->
