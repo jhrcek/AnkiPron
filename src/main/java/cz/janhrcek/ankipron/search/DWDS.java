@@ -14,7 +14,7 @@ import org.openqa.selenium.WebDriver;
 public class DWDS extends AbstractSearcher {
 
     private static final By PRONUNCIATION = By.cssSelector("audio>source");
-    private static final By WORD_FOUND = By.xpath("//h2[contains(text(),'Bedeutung')]");
+    private static final By WORD_FOUND = By.cssSelector(".dwdswb-artikel");
 
     public DWDS(WebDriver driver) {
         super(driver);
