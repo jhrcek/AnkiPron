@@ -28,6 +28,7 @@ Antlitz
 Aquädukt
 Arbeitsgang
 Arktis
+Ass
 Atomkraftwerk
 attraktiv
 Aufbettung
@@ -48,6 +49,7 @@ Authentizität
 außer
 backen
 Backenzahn
+Baggersee
 Balg
 Ballaststoff
 Balliste
@@ -69,6 +71,7 @@ Biest
 Bildergeschichte
 bleifrei
 Bleistiftanspitzer
+Bleistiftanspitzer
 blöd
 Brathendl
 Breitenkreis
@@ -86,6 +89,7 @@ Dekolleté
 Dezimalbruch
 Dinosaurier
 Dogge
+durcheinanderwirbeln
 durchstehen
 Dünkel
 Einfamilienhaus
@@ -97,6 +101,7 @@ Empfangschef
 Empfinden
 emporsteigen
 Entführer
+Entscheidungsfindung
 Entscheidungsfindung
 Entscheidungsfrage
 entsteinen
@@ -126,6 +131,7 @@ fort
 Foto
 Fotomodell
 Freiberufler
+Freiberufler
 freihaben
 Fremde
 Frieden
@@ -133,10 +139,12 @@ Frühjahr
 Fundgegenstand
 furchtbar
 Fußstapfen
+Fußstapfen
 Fußweg
 Gast
 Gebrauchtwaren
 Gefallen
+gegensteuern
 gegensteuern
 Geheiß
 Geißlein
@@ -152,6 +160,7 @@ Gewinnzahl
 gewitzt
 gewährleisten
 Glas
+gleichbedeutend
 grauen
 großenteils
 gut
@@ -162,6 +171,7 @@ Hausarzt
 heim
 herausgeben
 heute
+hinauszögern
 hinauszögern
 hinfallen
 hingegen
@@ -200,6 +210,7 @@ Kopflehne
 Kopfschmerz
 kriminalisieren
 Kultusminister
+Kunstfaser
 Kutscher
 Köstlichkeit
 Lateinamerika
@@ -243,6 +254,7 @@ nützen
 Obdachlose
 Orthographie
 Pappbecher
+Pazifik
 perfid
 Pflaume
 Phiole
@@ -279,6 +291,7 @@ Ruhestatt
 Rückmeldung
 rütteln
 S-Bahn
+Sanitäranlage
 Saufgelage
 Schicht
 Schiffbau
@@ -294,6 +307,7 @@ Schwule
 Schwüle
 selbst
 selbstlos
+Selbstverwirklichung
 Selbstverwirklichung
 semantisch
 senkrecht
@@ -312,6 +326,7 @@ Straftäter
 Straßenbahnschiene
 stressig
 Stromausfall
+Stromschlag
 strukturell
 Studienfach
 Studiengang
@@ -328,6 +343,7 @@ Top
 Tor
 totschlagen
 tottreten
+trockenreiben
 trockenreiben
 trüb
 Uhrzeit
@@ -383,6 +399,8 @@ Wirkstoff
 Wohlergehen
 wolkenlos
 Zahnseide
+Zahnspange
+Zahnzwischenraumbürste
 Zauberer
 Zehe
 zerfleddert
@@ -394,6 +412,7 @@ Zivildienst
 zusammenhanglos
 zusätzlich
 zuteilwerden
+zuungunsten
 zuungunsten
 zwar
 Zwischenmahlzeit
