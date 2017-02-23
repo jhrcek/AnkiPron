@@ -39,12 +39,14 @@ aufständisch
 aufwiegen
 aufwändig
 Augapfel
+Augenzahl
 ausdörren
 auseinandernehmen
 aushungern
 ausschenken
 ausschließlich
 Aussichtsturm
+Auszeit
 Authentizität
 außer
 backen
@@ -59,6 +61,7 @@ Bauer
 befehligen
 behände
 beidhändig
+Bekenntnis
 Bernstein
 Besserwisser
 Bete
@@ -86,6 +89,7 @@ darstellbar
 das
 deinetwegen
 Dekolleté
+Denkmalschutz
 Dezimalbruch
 Dinosaurier
 Dogge
@@ -148,6 +152,7 @@ gegensteuern
 gegensteuern
 Geheiß
 Geißlein
+Geldtasche
 Gelüste
 Genozid
 Geographie
@@ -198,8 +203,10 @@ Kampfkunst
 kaputtschlagen
 Kassierer
 Kater
+Kindersendung
 Klimaschutz
 Knopfdruck
+Koffein
 Kohlekraftwerk
 Kolonisator
 Kommandozeile
@@ -383,6 +390,7 @@ vorbeibringen
 vorbeugen
 Vorgehensweise
 vorne
+vorspulen
 wachrufen
 waghalsig
 wahrscheinlich
@@ -396,6 +404,7 @@ wiedergutmachen
 Wiederverwertung
 Windschutzscheibe
 Wirkstoff
+Wischmopp
 Wohlergehen
 wolkenlos
 Zahnseide
