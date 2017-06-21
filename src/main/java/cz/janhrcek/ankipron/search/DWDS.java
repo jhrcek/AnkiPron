@@ -23,7 +23,7 @@ public class DWDS extends AbstractSearcher {
     @Override
     public SearchResult search(String word) {
         Objects.requireNonNull(word, "word");
-        wait5seconds();
+        wait(2);
         pronUrl = null;
         System.out.print("Searching word " + ++counter + ": '" + word + "' - ");
         driver.get("http://www.dwds.de/?qu=" + word);
@@ -48,9 +48,9 @@ public class DWDS extends AbstractSearcher {
     }
 
     // Wait to avoid DWDS throttling repeated searches
-    private void wait5seconds() {
+    private void wait(int seconds) {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(seconds * 1000);
         } catch (InterruptedException e) {
             // ignore
         }

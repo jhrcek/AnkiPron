@@ -6,6 +6,7 @@ abgeben
 abhängen
 Ablehnung
 Abort
+abschotten
 Abwechslung
 Affäre
 allein
@@ -43,6 +44,7 @@ Augenzahl
 ausdörren
 auseinandernehmen
 aushungern
+ausrenken
 ausschenken
 ausschließlich
 Aussichtsturm
@@ -56,6 +58,7 @@ Balg
 Ballaststoff
 Balliste
 Bar
+Barbier
 Barmherzigkeit
 Bauer
 befehligen
@@ -76,6 +79,7 @@ bleifrei
 Bleistiftanspitzer
 Bleistiftanspitzer
 blöd
+Bohrmaschine
 Brathendl
 Breitenkreis
 Busfahrt
@@ -94,6 +98,7 @@ Dezimalbruch
 Dinosaurier
 Dogge
 durcheinanderwirbeln
+Durchgangsraum
 durchstehen
 Dünkel
 Einfamilienhaus
@@ -120,6 +125,7 @@ ertragreich
 es
 Esoterik
 Essstäbchen
+Etagenbett
 euresgleichen
 Exempel
 Fachbereich
@@ -147,6 +153,7 @@ Fußstapfen
 Fußweg
 Gast
 Gebrauchtwaren
+gebärfreudig
 Gefallen
 gegensteuern
 gegensteuern
@@ -158,6 +165,7 @@ Genozid
 Geographie
 geographisch
 gerade
+Gerichtsvollzieher
 gern
 gerne
 getüpfelt
@@ -168,12 +176,14 @@ Glas
 gleichbedeutend
 grauen
 großenteils
+großgehen
 gut
 Gültigkeitsdauer
 handlungsfähig
 Handvoll
 Hausarzt
 heim
+Heiratsurkunde
 herausgeben
 heute
 hinauszögern
@@ -185,6 +195,7 @@ Hoden
 Hornisse
 Händeschütteln
 Häuschen
+Immobiliensteuer
 Immunsystem
 Impfstoff
 importieren
@@ -215,6 +226,7 @@ Komplexität
 Konzentrationslager
 Kopflehne
 Kopfschmerz
+kreditwürdig
 kriminalisieren
 Kultusminister
 Kunstfaser
@@ -222,6 +234,7 @@ Kutscher
 Köstlichkeit
 Lateinamerika
 Lebensart
+leibhaftig
 Leibwächter
 Leid
 leidenschaftlich
@@ -254,6 +267,7 @@ Name
 Nebensatz
 Nebensächlichkeit
 Nichtraucherabteil
+Nickerchen
 Niederlande
 nirgendwohin
 Nummernschild
@@ -294,12 +308,14 @@ Residenz
 Ribisel
 ringsum
 Rohkost
+Rudermaschine
 Ruhestatt
 Rückmeldung
 rütteln
 S-Bahn
 Sanitäranlage
 Saufgelage
+scheren
 Schicht
 Schiffbau
 Schiffbauer
@@ -320,6 +336,7 @@ semantisch
 senkrecht
 silbrig
 Skala
+Solarzelle
 Sonnencreme
 sonst
 Spazierstock
@@ -346,6 +363,7 @@ tatenlos
 Teilchen
 Teleskop
 Tennisprofi
+Tischkicker
 Top
 Tor
 totschlagen
@@ -426,4 +444,5 @@ zuungunsten
 zwar
 Zwischenmahlzeit
 Züchtung
+überfliegen
 Überforderung
