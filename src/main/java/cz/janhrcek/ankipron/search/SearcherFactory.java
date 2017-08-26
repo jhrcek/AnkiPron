@@ -44,10 +44,10 @@ public class SearcherFactory {
 
     private static WebDriver createWebDriverWithAdBlock(String currentDir) {
         Path adBlockPlusFile = Paths.get(currentDir, "adblockpluschrome.crx");
-        
         if (!Files.exists(adBlockPlusFile)) {
-            throw new IllegalStateException("Expecting AdBlockPlus extension file to exist: " + adBlockPlusFile.toAbsolutePath()
-                    + "\nYou can download it from https://downloads.adblockplus.org/devbuilds/adblockpluschrome/");
+            String msg = "Expecting AdBlockPlus extension file to exist: " + adBlockPlusFile.toAbsolutePath()
+                    + "\nYou can download it from https://downloads.adblockplus.org/devbuilds/adblockpluschrome/";
+            throw new IllegalStateException(msg);
         }
 
         ChromeOptions options = new ChromeOptions();

@@ -16,36 +16,16 @@ public class DWDSTest {
     @Test
     public void wordWithoutPron() {
         assertResultAndPronURL("Ärger", SearchResult.PRON_NOT_AVAILABLE, false);
-        assertResultAndPronURL("Konzentrationslager", SearchResult.PRON_NOT_AVAILABLE, false);
-        assertResultAndPronURL("zweifellos", SearchResult.PRON_NOT_AVAILABLE, false);
     }
 
     @Test
     public void wordNotFound() {
         assertResultAndPronURL("nonexistent", SearchResult.WORD_NOT_FOUND, false);
-        assertResultAndPronURL("Aufenthaltszimmer", SearchResult.WORD_NOT_FOUND, false);
-        assertResultAndPronURL("letztendlich", SearchResult.WORD_NOT_FOUND, false);
     }
 
     @Test
     public void pronFound() {
         assertResultAndPronURL("Bruder", SearchResult.PRON_FOUND, true);
-        assertResultAndPronURL("und", SearchResult.PRON_FOUND, true);
-        assertResultAndPronURL("Abscheulichkeit", SearchResult.PRON_FOUND, true);
-    }
-
-    @Test
-    public void withoutPronAfterWithPron() {
-        assertResultAndPronURL("und", SearchResult.PRON_FOUND, true);
-        //Make sure pron Url is nulled after successfull search
-        assertResultAndPronURL("Ärger", SearchResult.PRON_NOT_AVAILABLE, false);
-    }
-
-    @Test
-    public void notFoundAfterWithPron() {
-        assertResultAndPronURL("und", SearchResult.PRON_FOUND, true);
-        //Make sure pron URL is nulled after successfull search
-        assertResultAndPronURL("nonexistent", SearchResult.WORD_NOT_FOUND, false);
     }
 
     private void assertResultAndPronURL(String word, SearchResult searchResult, boolean urlExpected) {
@@ -53,7 +33,7 @@ public class DWDSTest {
         String url = dwds.getPronURL();
         if (urlExpected) {
             assertNotNull(url);
-            assertTrue(url.startsWith("http://media.dwds.de/dwds2/"));
+            assertTrue(url.startsWith("https://media.dwds.de/dwds2/audio"));
             assertTrue(url.endsWith(".mp3"));
         } else {
             assertNull(url);

@@ -1,16 +1,18 @@
 package cz.janhrcek.ankipron.search;
 
 import org.junit.AfterClass;
+
 import static org.junit.Assert.assertEquals;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- *
  * @author jhrcek
  */
 public class DudenTest {
 
-    private static final Searcher DUDEN = SearcherFactory.newDuden();
+    private static Searcher DUDEN;
 
     @Test
     public void wordWithoutPron() {
@@ -39,8 +41,13 @@ public class DudenTest {
         assertEquals(pronUrl, DUDEN.getPronURL());
     }
 
+    @BeforeClass
+    public static void initSearcher() {
+        DUDEN = SearcherFactory.newDuden();
+    }
+
     @AfterClass
-    public static void closeDwds() {
+    public static void closeSearcher() {
         if (DUDEN != null) {
             DUDEN.close();
         }

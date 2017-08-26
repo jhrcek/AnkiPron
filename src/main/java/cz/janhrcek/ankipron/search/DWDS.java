@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 
 /**
  * This class encapsulates the use of a web page dwds.de
+ *
  * @author jhrcek
  */
 public class DWDS extends AbstractSearcher {
@@ -23,7 +24,6 @@ public class DWDS extends AbstractSearcher {
     @Override
     public SearchResult search(String word) {
         Objects.requireNonNull(word, "word");
-        wait(2);
         pronUrl = null;
         System.out.print("Searching word " + ++counter + ": '" + word + "' - ");
         driver.get("http://www.dwds.de/?qu=" + word);
@@ -47,12 +47,4 @@ public class DWDS extends AbstractSearcher {
         return driver.findElement(PRONUNCIATION).getAttribute("src");
     }
 
-    // Wait to avoid DWDS throttling repeated searches
-    private void wait(int seconds) {
-        try {
-            Thread.sleep(seconds * 1000);
-        } catch (InterruptedException e) {
-            // ignore
-        }
-    }
 }

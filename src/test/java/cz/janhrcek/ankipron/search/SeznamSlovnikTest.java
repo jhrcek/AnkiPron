@@ -24,11 +24,11 @@ public class SeznamSlovnikTest {
     @Test
     public void pronFound() {
         assertResutlAndPronURL("Bruder", SearchResult.PRON_FOUND,
-                "http://slovnik.seznam.cz/sound/wav/de_cz/ge-006922.wav");
+                "https://slovnik.seznam.cz/sound/wav/de_cz/ge-006922.wav");
         assertResutlAndPronURL("und", SearchResult.PRON_FOUND,
-                "http://slovnik.seznam.cz/sound/wav/de_cz/ge-042154.wav");
+                "https://slovnik.seznam.cz/sound/wav/de_cz/ge-042154.wav");
         assertResutlAndPronURL("Schwester", SearchResult.PRON_FOUND,
-                "http://slovnik.seznam.cz/sound/wav/de_cz/ge-035742.wav");
+                "https://slovnik.seznam.cz/sound/wav/de_cz/ge-035742.wav");
     }
 
     private void assertResutlAndPronURL(String word, SearchResult searchResult, String pronUrl) {
