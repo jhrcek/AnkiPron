@@ -21,10 +21,6 @@ public class Project {
     private static final Path DOWNLOAD_DIR = ROOT_DIR.resolve("Downloaded");
     private static final Path ANKI_DB = ROOT_DIR.resolve("collection.anki2");
 
-    public static Path getRootDir() {
-        return ROOT_DIR;
-    }
-
     public static Path getDownloadDir() {
         return DOWNLOAD_DIR;
     }

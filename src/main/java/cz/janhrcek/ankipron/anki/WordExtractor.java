@@ -6,13 +6,13 @@ import java.util.regex.Pattern;
 /**
  * @author jhrcek
  */
-public class WordExtractor {
+class WordExtractor {
 
     public static final String FIELD_SEPARATOR = "\u001F"; //Unicode Character 'INFORMATION SEPARATOR ONE'
 
     //Word of the form "e Frau" -> only "Frau" will be sought for
     private static final Pattern SUBST_WITH_ARTICLE = Pattern.compile("^\\(?[res]\\)?(/e)? ([^\\s]*)");
-    private static final String THING_IN_PARENS = "\\([^\\)]*\\)"; //Aything surrounded by ()
+    private static final String THING_IN_PARENS = "\\([^\\)]*\\)"; //Anything surrounded by ()
     private static final String PRON_REFERENCE = "\\[sound:.*\\.mp3\\]"; //Reference to pron mp3 file
     private static final String PART_AFTER_DASH = " - .*";
 
@@ -28,7 +28,7 @@ public class WordExtractor {
     }
 
     /**
-     * @param fldsAttribute
+     * @param fldsAttribute Value of "flds" attribute
      * @return the 4 fields of the fldsAttribute
      * @throws IllegalArgumentException when fldsAttribute does not have 4 fields separated by FIELD_SEPARATOR
      */

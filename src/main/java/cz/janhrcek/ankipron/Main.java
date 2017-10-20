@@ -43,7 +43,7 @@ public class Main {
         }
     }
 
-    public static void downloadMp3sForWords(Searcher searcher) throws IOException, ClassNotFoundException {
+    private static void downloadMp3sForWords(Searcher searcher) throws IOException, ClassNotFoundException {
         List<String> alreadyDownloaded = Project.getWordsDownloaded();
         List<String> notInDictionary = Project.getWordsNotFound();
         List<String> withoutDownloadablePron = Project.getWordsForWhichPronNotAvailable();
@@ -65,7 +65,7 @@ public class Main {
         downloader.performDownload(pronsToDownload);
     }
 
-    public static void addMp3RefsToAnkiDb() throws ClassNotFoundException {
+    private static void addMp3RefsToAnkiDb() throws ClassNotFoundException {
         AnkiDatabase db = new AnkiDatabase();
         List<AnkiNote> notesWithoutPron = db.getNotesWithoutPron();
         db.addMp3ReferencesToAnkiDb(notesWithoutPron);
@@ -74,7 +74,7 @@ public class Main {
     /**
      * We must make sure that Anki DB data have sufficient quality to begin with.
      */
-    public static void verifyAnkiNotesIntegrity() throws ClassNotFoundException {
+    private static void verifyAnkiNotesIntegrity() throws ClassNotFoundException {
         List<AnkiNote> notesWithoutPron = new AnkiDatabase().getNotesWithoutPron();
         for (AnkiNote note : notesWithoutPron) {
             String deutsch = note.getDeutsch();

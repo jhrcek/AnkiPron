@@ -49,7 +49,7 @@ public class SeznamSlovnik extends AbstractSearcher {
         }
     }
 
-    public boolean wordNotFound() {
+    private boolean wordNotFound() {
         return !driver.findElements(SUGGESTION).isEmpty()
                 || !driver.findElements(NOTHING_FOUND).isEmpty();
     }

@@ -57,10 +57,8 @@ public class AnkiNote {
 
     @Override
     public String toString() {
-        return new StringBuilder()
-                .append("AnkiNote{flds='").append(flds)
-                .append("', tags='").append(tags)
-                .append("', id=").append(id).append("}")
-                .toString();
+        return "AnkiNote{flds='" + flds +
+                "', tags='" + tags +
+                "', id=" + id + "}";
     }
 }

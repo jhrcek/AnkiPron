@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
 
-public class PronDownloader {
+class PronDownloader {
 
     private final Path downloadDir;
     private static final String URLS = "urls.txt";

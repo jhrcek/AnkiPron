@@ -1,7 +1,3 @@
-# Netbeans
-nb-configuration.xml
-nbactions.xml
-
 # Idea
 .idea
 *.iml

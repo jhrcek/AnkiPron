@@ -7,15 +7,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+
 import org.openqa.selenium.WebDriver;
 
 public abstract class AbstractSearcher implements Searcher {
 
-    protected final WebDriver driver;
-    protected String pronUrl = null;
-    protected int counter = 0; //Counting the number of words searched for loggin purposes
+    final WebDriver driver;
+    String pronUrl = null;
+    int counter = 0; //Counting the number of words searched for loggin purposes
 
-    public AbstractSearcher(WebDriver driver) {
+    AbstractSearcher(WebDriver driver) {
         this.driver = Objects.requireNonNull(driver);
     }
 
@@ -58,7 +59,7 @@ public abstract class AbstractSearcher implements Searcher {
     }
 
     private void printReport(Set<String> wordsFound, List<String> wordsNotFound, List<String> pronNotAvailable,
-            List<String> unknownErrors) {
+                             List<String> unknownErrors) {
         System.out.println("SEARCH REPORT");
         reportCollection("Found", wordsFound);
         reportCollection("Not found", wordsNotFound);

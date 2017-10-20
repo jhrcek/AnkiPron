@@ -3,13 +3,12 @@ package cz.janhrcek.ankipron.search;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
- *
  * @author hrk
  */
 public class SearcherFactory {
@@ -29,7 +28,7 @@ public class SearcherFactory {
     private static WebDriver createWebDriver(boolean withAdBlock) {
         String currentDir = System.getProperty("user.dir");
         Path chromedriverBinary = Paths.get(currentDir, "chromedriver");
-        
+
         if (!Files.exists(chromedriverBinary)) {
             throw new IllegalStateException("Expecting chromedriver binary to exist: " + chromedriverBinary.toAbsolutePath()
                     + "\nYou can download it from https://sites.google.com/a/chromium.org/chromedriver/downloads");
@@ -52,8 +51,6 @@ public class SearcherFactory {
 
         ChromeOptions options = new ChromeOptions();
         options.addExtensions(adBlockPlusFile.toFile());
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-        return new ChromeDriver(capabilities);
+        return new ChromeDriver(options);
     }
 }
