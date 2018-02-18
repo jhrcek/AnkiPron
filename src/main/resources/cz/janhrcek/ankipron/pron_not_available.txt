@@ -13,6 +13,7 @@ allein
 allerdings
 alles
 als
+Ameisehaufen
 andererseits
 Anfangsbuchstabe
 anfunkeln
@@ -52,6 +53,7 @@ austüfteln
 Auszeit
 Authentizität
 außer
+Avocado
 backen
 Backenzahn
 Baggersee
@@ -85,6 +87,7 @@ Bohrmaschine
 Brathendl
 Breitenkreis
 Bundestagswahl
+bundesweit
 Busfahrt
 Böse
 Chips
@@ -149,6 +152,7 @@ Freiberufler
 Freiberufler
 freihaben
 Fremde
+fremdeln
 Frieden
 Fruchtbarkeit
 Frühjahr
@@ -167,11 +171,11 @@ gegensteuern
 gegensteuern
 Geheiß
 Gehörschutzstöpsel
+Geiselnahme
 Geistesgegenwart
 Geißlein
 Geldtasche
 Gelüste
-Genozid
 Geographie
 geographisch
 gerade
@@ -186,11 +190,13 @@ gewitzt
 gewährleisten
 Glas
 gleichbedeutend
+gleichtun
 grauen
 Grotte
 großenteils
 großgehen
 gut
+Gänserich
 Gültigkeitsdauer
 handlungsfähig
 Handvoll
@@ -208,6 +214,7 @@ hochbetagt
 Hoden
 Hornisse
 Händeschütteln
+Häppchen
 Häuschen
 Immobiliensteuer
 Immunsystem
@@ -231,6 +238,7 @@ Kassierer
 Kater
 Kindersendung
 Klimaschutz
+Knaller
 Knauf
 Knopfdruck
 Koffein
@@ -247,6 +255,7 @@ kreditwürdig
 kriminalisieren
 Kultusminister
 Kunstfaser
+Kunstfälschung
 Kutscher
 Kutterfleckensuppe
 Köstlichkeit
@@ -263,6 +272,8 @@ Lichtjahr
 liebkosen
 Lob
 Löwenanteil
+Lügendetektor
+Maiskolben
 Majonäse
 mancherlei
 Mannschaftssport
@@ -292,6 +303,7 @@ Nichtraucherabteil
 Nickerchen
 Niederlande
 nirgendwohin
+Nudelholz
 Nummernschild
 nützen
 Obdachlose
@@ -303,6 +315,7 @@ Pazifik
 perfid
 Pflaume
 Phiole
+pietätvoll
 Pilger
 Plan
 platzen
@@ -333,6 +346,7 @@ Ribisel
 ringsum
 Rohkost
 Rotzglocke
+Rucola
 Rudermaschine
 Ruhestatt
 Rückmeldung
@@ -348,21 +362,26 @@ schlüpfen
 Schnittstelle
 schnoddrig
 Schorle
+Schoß
 Schrauberzieher
 Schreibschrift
 Schultasche
 Schweinebraten
+Schwimmflosse
 schwirren
 Schwule
 Schwüle
 selbst
 selbstlos
+selbstmitleidig
 Selbstverwirklichung
 Selbstverwirklichung
 semantisch
+Semmelknödel
 senkrecht
 silbrig
 Skala
+Slibowitz
 Solarzelle
 Sonnencreme
 sonst
@@ -377,6 +396,7 @@ Steppdecke
 Stock
 Straftäter
 Straßenbahnschiene
+Straßenverkehrsordnung
 stressig
 Stromausfall
 Stromschlag
@@ -418,13 +438,16 @@ untersagen
 Urahn
 Utopist
 Vegetarier
+veraltern
 verantwortungslos
 verbrühen
 verfügen
 vergaffen
 vergebens
 vergiften
+vergilben
 vermarkten
+vernehmen
 Versandhaus
 versperren
 verspotten
@@ -438,6 +461,7 @@ vorbehalten
 vorbeibringen
 vorbeugen
 Vorgehensweise
+vorherbestimmt
 vorne
 vorspulen
 wachrufen
@@ -469,6 +493,7 @@ ziemlich
 zig
 Zivildienst
 zusammenhanglos
+zusammenmengen
 zusätzlich
 zuteilwerden
 zuungunsten
