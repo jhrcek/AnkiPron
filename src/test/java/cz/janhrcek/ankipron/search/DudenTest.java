@@ -29,11 +29,11 @@ public class DudenTest {
     @Test
     public void pronFound() {
         assertResutlAndPronURL("Bruder", SearchResult.PRON_FOUND,
-                "http://www.duden.de/_media_/audio/ID4113233_375377226.mp3");
+                "https://www.duden.de/_media_/audio/ID4113233_375377226.mp3");
         assertResutlAndPronURL("und", SearchResult.PRON_FOUND,
-                "http://www.duden.de/_media_/audio/ID4108567_408496814.mp3");
+                "https://www.duden.de/_media_/audio/ID4108567_408496814.mp3");
         assertResutlAndPronURL("Schwester", SearchResult.PRON_FOUND,
-                "http://www.duden.de/_media_/audio/ID4113088_151622151.mp3");
+                "https://www.duden.de/_media_/audio/ID4113088_151622151.mp3");
     }
 
     private void assertResutlAndPronURL(String word, SearchResult searchResult, String pronUrl) {
